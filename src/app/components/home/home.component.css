@@ -1,0 +1,27 @@
+.navbar-toggler:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    /* text-decoration: ; */
+    color: black;
+}
+
+.todo-contenido {
+    height: 100vh;
+}
+
+.bg-sections {
+    background: url('../../../assets/img/bg.webp');
+    background-attachment: fixed;
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    ;
+}

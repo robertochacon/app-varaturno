@@ -1,0 +1,4 @@
+.navbar-toggler:focus {
+    border-color: transparent;
+    box-shadow: none;
+}

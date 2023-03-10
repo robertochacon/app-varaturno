@@ -1,0 +1,268 @@
+<div class="preloader" [ngClass]="loading===true?'d-block show':'d-none hide'">
+    <div class="loader">
+        <div class="ytp-spinner">
+            <div class="ytp-spinner-container">
+                <div class="ytp-spinner-rotator">
+                    <div class="ytp-spinner-left">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                    <div class="ytp-spinner-right">
+                        <div class="ytp-spinner-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<header class="header">
+    <div class="navbar-area bg-white" style="border-bottom: 3px solid #638061;border-top: 3px solid #638061;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/img/logo/logo.png" width="70px" alt="Logo" />
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            <span class="toggler-icon"></span>
+                            </button>
+                        <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                            <ul id="nav" class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="page-scroll" href="#home">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll" href="#services">Servicios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll" href="#about">Nosotros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll" href="#how">Como funcionamos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="page-scroll" href="#received">Contactos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a routerLink="/login" class="page-scroll">Login</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="home" class="hero-section bg-sections todo-contenido" style="overflow:hidden;">
+    <div class="hero-shape">
+        <img src="assets/img/hero/hero-shape.svg" alt="" class="shape" />
+    </div>
+    <div class="container overflow-hidden">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="wow fadeInUp" data-wow-delay=".2s">Consulta desde casa</h1>
+                    <h3 class="wow fadeInUp" data-wow-delay=".2s"><span>Evitando contratiempos</span> </h3>
+                    <a href="javascript:void(0)" routerLink="/consulting-out" class="main-btn shadow btn-hover wow fadeInUp" data-wow-delay=".6s">Consultar</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-img wow fadeInUp" data-wow-delay=".5s">
+                    <img src="assets/img/search_.svg" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="services" class="service-section pt-150 pb-150 bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8">
+                <div class="section-title text-center mb-70">
+                    <span class="wow fadeInUp" data-wow-delay=".2s">Servicio de consulta</span>
+                    <h1 class="wow fadeInUp" data-wow-delay=".4s">Todo lo que necesitas</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-service wow fadeInUp" data-wow-delay=".2s">
+                    <img src="assets/img/service/qr.png" width="90px" height="90px" alt="" />
+                    <div class="content mt-4">
+                        <h3>Codigo QR</h3>
+                        <p>Facil acceso para consultar tus resultados atraves de un codigo QR.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-service wow fadeInUp" data-wow-delay=".4s">
+                    <img src="assets/img/service/email.png" width="100px" height="90px" alt="" />
+                    <div class="content mt-4">
+                        <h3>Correo</h3>
+                        <p>Enviamos tus resultados a tu correo y puedes reenviarlo nuevamente con un solo click.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="single-service wow fadeInUp" data-wow-delay=".6s">
+                    <img src="assets/img/service/delivery.png" width="100px" height="90px" alt="" />
+                    <div class="content mt-4">
+                        <h3>Mi ubicacion</h3>
+                        <p>Enviamos tu resultados a casa o donde sea que te encuentres.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about" class="about-section pt-150 pb-100 bg-sections">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-img wow fadeInUp" data-wow-delay=".5s">
+                    <img src="assets/img/about.svg" alt="" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <div class="section-title">
+                        <span class="wow fadeInUp" data-wow-delay=".2s">Acerca de nosotros</span>
+                        <h1 class="wow fadeInUp" data-wow-delay=".4s">Tus retultados a tiempo</h1>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">RCS es una plataforma que se encarga de gestionar y consultar resultados de laboratorios facilitando el facil acceso desde cualquier parte del mundo.</p>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">El objetivo principal de RCS es llegar a esas personas que no pueden asistir fisicamente a un lugar para obtener los resultados de algun analisis.</p>
+                    </div>
+                    <!-- <div class="rating-meta d-flex align-items-center wow fadeInUp" data-wow-delay=".65s">
+                        <h5>Rating 4.8</h5>
+                        <div class="rating">
+                            <i class="lni lni-star-filled"></i>
+                            <i class="lni lni-star-filled"></i>
+                            <i class="lni lni-star-filled"></i>
+                            <i class="lni lni-star-filled"></i>
+                            <i class="lni lni-star-filled"></i>
+                        </div>
+                    </div>
+                    <div class="counter-up wow fadeInUp" data-wow-delay=".8s">
+                        <div class="single-counter">
+                            <h3 id="secondo1" class="countup">1M</h3>
+                            <h5>Download</h5>
+                        </div>
+                        <div class="single-counter position-relative">
+                            <h3 id="secondo2" class="countup">234k </h3>
+                            <h5>Happy User</h5>
+                        </div>
+                        <div class="single-counter">
+                            <h3 id="secondo3" class="countup">34k </h3>
+                            <h5>Reviews</h5>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="how" class="delivery-section mt-150">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <div class="delivery-content">
+                    <div class="section-title">
+                        <span class="wow fadeInUp" data-wow-delay=".2s">Disponibilidad</span>
+                        <h1 class="mb-35 wow fadeInUp" data-wow-delay=".4s">RCS EXPRESS</h1>
+                        <p class="mb-35 wow fadeInUp" data-wow-delay=".6s">Te damos la opcion que al momento de consultar tus resultados puedas recivir tus resultados fisicamente con uno de los mensajeros.</p>
+                        <a href="javascript:void(0)" routerLink="/consulting-out" class="main-btn shadow btn-hover wow fadeInUp" data-wow-delay=".6s">Consultar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 order-first order-lg-last">
+                <div class="delivery-img wow fadeInUp text-center" data-wow-delay=".5s">
+                    <img class="rounded shadow" src="assets/img/rcs.gif" style="width:70%;" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="received" class="about-section received-section pt-150">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-img received-img wow fadeInUp" data-wow-delay=".5s">
+                    <img src="assets/img/contact.svg" alt="" />
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content received-content">
+                    <div class="section-title">
+                        <span class="wow fadeInUp" data-wow-delay=".2s"></span>
+                        <h1 class="mb-25 wow fadeInUp" data-wow-delay=".4s">Contactanos</h1>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            <b>Telefono</b>
+                            <br>
+                            <a href="tel:8297821156">829-782-1156</a>
+                            <br>
+                            <br>
+                            <b>Correo</b>
+                            <br>
+                            <a href="mailto:rcs.online.contacto@gmail.com">rcs.online.contacto@gmail.com</a>
+                            <br>
+                            <br>
+                            <b>Instagram</b>
+                            <br>
+                            <a href="https://www.instagram.com/racvycode/">RCS ONLINE</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="footer pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
+                    <div class="logo">
+                        <a href="#"><img src="assets/img/logo/logo.png" width="70px" alt="logo" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
+                    <h3>Acerca de nosotros</h3>
+                    <ul class="links">
+                        <li class="nav-item">
+                            <a class="page-scroll" href="#home">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll" href="#services">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll" href="#about">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll" href="#how">Como funcionamos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="page-scroll" href="#received">Contactos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/login" class="page-scroll">Login</a>
+                        </li>
+                    </ul>
+                </div>
+                <p class="text-white"> ©opyright - 2022</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<a href="#" class="scroll-top btn-hover">
+    <i class="lni lni-chevron-up"></i>
+</a>
+
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

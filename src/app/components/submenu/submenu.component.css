@@ -1,0 +1,43 @@
+.without-borders {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* .selected {
+    background: white;
+    color: gray;
+} */
+
+.btns {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    text-decoration: none;
+    color: white;
+}
+
+.btns:hover {
+    color: rgb(58, 58, 58);
+}
+
+.btns:active {
+    font-size: 30px;
+}
+
+.menu {
+    border-radius: 10px 10px;
+    position: fixed;
+    width: 150px;
+    height: 98vh;
+    left: 0px;
+    margin-top: 10px;
+    margin-left: 10px;
+    overflow-y: scroll;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #050a30;
+}
+
+a {
+    display: block;
+}

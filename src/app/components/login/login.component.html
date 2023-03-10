@@ -1,0 +1,37 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="fc">
+
+    <div class="container">
+
+        <div class="row justify-content-center allscreen pt-5">
+
+            <div class="row justify-content-center pt-5">
+                <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                    <!-- <img src="../../../assets/img/login.svg" alt="" width="50%"> -->
+                    <img src="../../../assets/img/valeturno.png" class=" pt-2 pb-2 mt-1 mb-1" alt="">
+
+                    <h2></h2>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6 col-sm-10 shadow p-5 text-center border-radio">
+                <div class="alert alert-danger" role="alert" *ngIf="loginError">
+                    Su identificacion o su clave esta incorrecta, verifique y vuelva a intentar
+                </div>
+                <!-- <h5 for="" class="text-white">Credenciales de usuario</h5> -->
+                <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su identificacion">
+                <input type="password" [(ngModel)]="password" class="form-control shadow mt-3" maxLength="11" placeholder="Digite su clave">
+                <button *ngIf="!loading" class="btn btn-info btn-block btn-lg mt-3 shadow" [disabled]="identification === '' && password === ''" (click)="login()">
+                    Ingresar
+                </button>
+                <button *ngIf="loading" class="btn btn-info btn-block btn-lg mt-3 shadow">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Ingresando...
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
