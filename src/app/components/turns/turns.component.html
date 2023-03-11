@@ -27,7 +27,7 @@
                         <h5 class="text-dark mb-2">Lista</h5>
 
                         <div *ngFor="let turn of listTurns">
-                            <div *ngIf="turn.status!='cancel'" class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" role="alert" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
+                            <div *ngIf="turn.status!='cancel'" [class]="'alert shadow bg-'+returnColor(turn.status)" data-bs-toggle="modal" data-bs-target="#wathTurn" role="alert" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
                                 <div class="row">
                                     <div class="col-4 text-center">
                                         <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
@@ -63,7 +63,7 @@
                     <div class="modal-body">
                         <div class="row justify-content-around">
                             <div class="col-4">
-                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark" data-bs-dismiss="modal" style="cursor:pointer;" (click)="setStatusTurn('Llamando turno','call')">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark" style="cursor:pointer;" (click)="setStatusTurn('Llamando turno','call')">
                                     <img src="../../../assets/img/speaker.png" width="50px" alt=""><br>
                                     <b>Llamar</b>
                                 </div>

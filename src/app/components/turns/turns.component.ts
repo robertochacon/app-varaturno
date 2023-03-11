@@ -34,7 +34,7 @@ export class TurnsComponent implements OnInit {
     this.windows = localStorage.getItem('aw');
     for(let i=1; i<= parseInt(this.windows);i++){
       this.listWindows.push(i);
-    }    
+    }
   }
 
   getAllServices(){
@@ -162,6 +162,16 @@ export class TurnsComponent implements OnInit {
       });
     })
 
+  }
+
+  returnColor(status:string){
+    if(status=='call'){
+      return 'success';
+    }else if(status=='wait'){
+      return 'dark';
+    }else{
+      return 'info';
+    }
   }
 
 }

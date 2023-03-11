@@ -12,7 +12,7 @@
                     <h2 class="text-dark mb-2">Lista de turnos</h2>
 
                     <div *ngFor="let turn of listTurns">
-                        <div *ngIf="turn.status!='cancel'&&turn.status!='done'" class="bg-dark alert shadow" role="alert">
+                        <div *ngIf="turn.status!='cancel'&&turn.status!='done'" [class]="'alert shadow bg-'+returnColor(turn.status)" role="alert">
                             <div class="row">
                                 <div class="col-4 text-center">
                                     <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/services/services.service';
 import { TurnsService } from 'src/app/services/turns.service';
-import Swal from 'sweetalert2'
+import Echo from 'laravel-echo';
 
 @Component({
   selector: 'app-screen',
@@ -12,75 +12,13 @@ export class ScreenComponent implements OnInit {
 
   loading = false;
   loadData = false;
-  result = '';
-  turnName = '';
-  serviceName = '';
-  code = '';
-  user_id:any = '';
-  entity_id:any = '';
-  listServices: any[] = [];
   listTurns: any[] = [];
 
   constructor(private _services: ServicesService, private _turns: TurnsService) { }
 
   ngOnInit(): void {
-    this.getAllServices();
     this.getAllTurns();
-    this.user_id = localStorage.getItem('user_id');
-    this.entity_id = localStorage.getItem('entity_id');
-  }
-
-  getAllServices(){
-    this.loading = true;
-
-    this._services.getAllServices().subscribe((response)=>{
-
-      this.listServices = response.data;
-
-      setTimeout(function(){
-        console.log(response.data);
-        
-      },100);
-      this.loading = false;
-      
-    }, error=>{
-        this.loadData = false;
-        this.loading = false;
-    })
-
-  }
-
-  save(): void {
-
-    this.loading = true;
-    let datos = new FormData();
-    datos.append("user_id",this.user_id);
-    datos.append("entity_id",this.entity_id);
-    datos.append("service",this.serviceName);
-    datos.append("code",this.code);
-    this._turns.setTurns(datos).subscribe((response)=>{
-      this.loading = false;
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Completado',
-        text: 'El turno '+response.data.code+response.data.id+' ha sido registrado.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      this.getAllTurns();
-    },error => {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Problemas tecnicos!',
-        text: 'No se pudo completar el registro, favor intente nuevamente.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      this.loading = false;
-    })
-
+    this.websockets();
   }
 
   getAllTurns(){
@@ -101,4 +39,62 @@ export class ScreenComponent implements OnInit {
     })
 
   }
+
+  websockets(){
+    const echo = new Echo({
+      broadcaster: 'pusher',
+      cluster: 'mt1',
+      key: 'RCA090698',
+      wsHost: window.location.hostname,
+      wsPort: 6001,
+      forceTLS: false,
+      disableStats: true,
+      enabledTransports: ['ws']
+    });
+
+    echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
+      console.log(resp);
+      this.getAllTurns();
+      if(typeof resp.msg === 'object'){
+        this.voice(resp.msg)
+      }
+    });
+
+  }
+
+  voice(msg:any){
+    const synth = window.speechSynthesis;
+    const utterThis = new SpeechSynthesisUtterance('Turno '+msg.turno);
+    utterThis.lang = 'es-ES';
+    synth.speak(utterThis);
+    setTimeout(()=>{
+      const utterThis = new SpeechSynthesisUtterance('Favor pasar al puesto '+msg.puesto);
+      utterThis.lang = 'es-ES';
+      synth.speak(utterThis);
+    },1000);
+  }
+
+  returnColor(status:string){
+    if(status=='call'){
+      return 'success';
+    }else if(status=='wait'){
+      return 'dark';
+    }else{
+      return 'info';
+    }
+  }
+
+  // speak(msg:string, status:string){
+  //   if(status=='call'){
+  //     let voice = new SpeechSynthesisUtterance();
+  //     voice.text = "Turno ";
+  //     window.speechSynthesis.speak(voice);
+  //     setTimeout(()=>{
+  //       voice.text = msg;
+  //       window.speechSynthesis.speak(voice);
+  //     },1000);
+  //   }
+
+  // }
+
 }

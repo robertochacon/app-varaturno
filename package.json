@@ -22,6 +22,7 @@
         "datatables.net": "^1.12.1",
         "datatables.net-dt": "^1.12.1",
         "jquery": "^3.6.1",
+        "laravel-echo": "^1.15.0",
         "leaflet": "^1.8.0",
         "pspdfkit": "^2022.5.1",
         "rxjs": "~7.5.0",

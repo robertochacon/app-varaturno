@@ -1,1 +1,36 @@
-<p>request-turn works!</p>
+<div class="row justify-content-center without-borders d-none d-lg-flex d-md-flex" style="background:url('https://png.pngtree.com/background/20210715/original/pngtree-gradient-blue-wavy-ocean-border-background-picture-image_1325412.jpg');background-size:100%;background-position: fized;background-attachment: fixed;background-repeat: none;height: 100vh;">
+
+    <div class="col-lg-10 col-md-10 col-sm-10 pt-5">
+        <div class="container pt-5 text-center shadow rounded" style="background-color: rgba(255, 255, 255, 0.8);">
+            <h1>Bienvenido a su gestion de turnos</h1>
+            <hr>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-10 ">
+                    <div class="container p-3">
+
+                        <h3 class="text-dark mb-4">¿Que servicio desea solicitar?</h3>
+
+                        <div [class]=" 'alert shadow text-center alert-'+service.color " *ngFor="let service of listServices " role="alert " style="cursor: pointer;border-left:3px solid #050a30;border-right: 3px solid #050a30;" (click)="serviceName=service.name;code=service.code;save() ">
+                            <h3>{{ service.name }}</h3>
+                        </div>
+
+                        <div class="alert " *ngIf="listServices.length<=0 ">
+                            <h4 class="text-secondary ">Sin servicios</h4>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none " style="height:100vh; ">
+    <div>
+        <img class="mb-3 " src="../../../assets/img/devices.svg " width="80% " alt=" ">
+        <h2 class="mb-3 ">Utilice una tableta o una pc para visualizar contenido.</h2>
+        <a routerLink="/ " class="btn btn-success shadow ">Pagina principal</a>
+    </div>
+</div>
