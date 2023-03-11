@@ -8,7 +8,7 @@
             <hr>
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12">
-                    <div class="container p-3 shadow rounded bg-dark">
+                    <div class="container p-3 shadow rounded" style="background-color:#050a30;">
 
                         <h3 class="text-white mb-4">Nuevo turno</h3>
 
@@ -26,19 +26,22 @@
                     <div class="container p-3 shadow rounded">
                         <h5 class="text-dark mb-2">Lista</h5>
 
-                        <div class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" *ngFor="let turn of listTurns" role="alert" (click)="turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
-                            <div class="row">
-                                <div class="col-12 text-center">
-                                    <h4 class="text-white">{{ turn.service }}</h4>
-                                </div>
-                                <div class="col-6 text-center">
-                                    <h4 class="text-white"><b>Turno:</b> {{ turn.code }}-0{{ turn.id }}</h4>
-                                </div>
-                                <div class="col-6 text-center">
-                                    <h4 class="text-white"><b>Hora:</b> {{ turn.created_at | date:'shortTime' }}</h4>
+                        <div *ngFor="let turn of listTurns">
+                            <div *ngIf="turn.status!='cancel'" class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" role="alert" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
+                                <div class="row">
+                                    <div class="col-4 text-center">
+                                        <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <h4 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h4>
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
 
                         <div class="alert" *ngIf="listTurns.length<=0">
                             <h4 class="text-secondary">Sin turnos</h4>
@@ -60,19 +63,19 @@
                     <div class="modal-body">
                         <div class="row justify-content-around">
                             <div class="col-4">
-                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark" data-bs-dismiss="modal" style="cursor:pointer;" (click)="setStatusTurn('Llamando turno','call')">
                                     <img src="../../../assets/img/speaker.png" width="50px" alt=""><br>
                                     <b>Llamar</b>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark" data-bs-dismiss="modal" style="cursor:pointer;" (click)="setStatusTurn('Puesto en espera','wait')">
                                     <img src="../../../assets/img/wait.png" width="50px" alt=""><br>
                                     <b>Posponer</b>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark" data-bs-dismiss="modal" style="cursor:pointer;" (click)="setStatusTurn('Turno cancelado','cancel')">
                                     <img src="../../../assets/img/delete_ticket.png" width="50px" alt=""><br>
                                     <b>Cancelar</b>
                                 </div>
@@ -81,9 +84,14 @@
                         <hr>
                         <h5>Trasladar al puesto -></h5>
                         <hr>
+                        <!-- <div class="container d-flex"> -->
+                        <div *ngFor="let window of listWindows" (click)="moveTurn(window)" data-bs-dismiss="modal" style="float: left;">
+                            <div class="btn btn-success m-1 p-1 shadow "><b>Puesto <br> {{ window }}</b></div>
+                        </div>
+                        <!-- </div> -->
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -93,10 +101,10 @@
 
 </div>
 
-<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
+<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none " style="height:100vh; ">
     <div>
-        <img class="mb-3" src="../../../assets/img/devices.svg" width="80%" alt="">
-        <h2 class="mb-3">Utilice una tableta o una pc para visualizar contenido.</h2>
-        <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
+        <img class="mb-3 " src="../../../assets/img/devices.svg " width="80% " alt=" ">
+        <h2 class="mb-3 ">Utilice una tableta o una pc para visualizar contenido.</h2>
+        <a routerLink="/ " class="btn btn-success shadow ">Pagina principal</a>
     </div>
 </div>

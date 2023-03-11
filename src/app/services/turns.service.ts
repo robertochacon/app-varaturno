@@ -33,6 +33,11 @@ export class TurnsService {
     return this.http.post(url, json);
   }
 
+  updateTurns(id: number, json: any): Observable<any>{
+    const url = this.url+'/update/'+id;
+    return this.http.post(url, json);
+  }
+
   deleteTurns(id: number): Observable<any>{
     const url = this.url+'/delete/'+id;
     return this.http.post(url, id);

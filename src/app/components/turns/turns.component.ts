@@ -13,11 +13,14 @@ export class TurnsComponent implements OnInit {
   loading = false;
   loadData = false;
   result = '';
+  selectTurn:any = '';
   turnName = '';
   serviceName = '';
   code = '';
   user_id:any = '';
   entity_id:any = '';
+  windows:any = '';
+  listWindows: any[] = [];
   listServices: any[] = [];
   listTurns: any[] = [];
 
@@ -28,6 +31,10 @@ export class TurnsComponent implements OnInit {
     this.getAllTurns();
     this.user_id = localStorage.getItem('user_id');
     this.entity_id = localStorage.getItem('entity_id');
+    this.windows = localStorage.getItem('aw');
+    for(let i=1; i<= parseInt(this.windows);i++){
+      this.listWindows.push(i);
+    }    
   }
 
   getAllServices(){
@@ -98,6 +105,61 @@ export class TurnsComponent implements OnInit {
     }, error=>{
         this.loadData = false;
         this.loading = false;
+    })
+
+  }
+
+  setStatusTurn(text:string, status:string): void {
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: text,
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    let datos = new FormData();
+    datos.append("status",status);
+    this._turns.updateTurns(this.selectTurn, datos).subscribe((response)=>{
+      this.getAllTurns();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+
+  }
+
+  moveTurn(window:any): void {
+
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Enviado al puesto '+window,
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    let datos = new FormData();
+    datos.append("status",'call');
+    datos.append("window",window);
+    this._turns.updateTurns(this.selectTurn, datos).subscribe((response)=>{
+      this.getAllTurns();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
     })
 
   }

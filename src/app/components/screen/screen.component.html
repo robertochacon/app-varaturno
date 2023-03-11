@@ -8,19 +8,21 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-12">
-                <div class="container p-3 shadow rounded">
+                <div class="container p-3 rounded">
                     <h2 class="text-dark mb-2">Lista de turnos</h2>
 
-                    <div class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" *ngFor="let turn of listTurns" role="alert" (click)="turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
-                        <div class="row">
-                            <div class="col-12 text-center">
-                                <h4 class="text-white">{{ turn.service }}</h4>
-                            </div>
-                            <div class="col-6 text-center">
-                                <h4 class="text-white"><b>Turno:</b> {{ turn.code }}-0{{ turn.id }}</h4>
-                            </div>
-                            <div class="col-6 text-center">
-                                <h4 class="text-white"><b>Hora:</b> {{ turn.created_at | date:'shortTime' }}</h4>
+                    <div *ngFor="let turn of listTurns">
+                        <div *ngIf="turn.status!='cancel'&&turn.status!='done'" class="bg-dark alert shadow" role="alert">
+                            <div class="row">
+                                <div class="col-4 text-center">
+                                    <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h4 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
