@@ -26,8 +26,10 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>Code</th>
                             <th>Nombre</th>
                             <th>Descripccion</th>
+                            <th>Color</th>
                             <th>Estado</th>
                             <th>Fecha</th>
                             <th>Accion</th>
@@ -36,8 +38,10 @@
                     <tbody>
                         <tr *ngFor="let entity of listEntities" class="text-start">
                             <td><i class="fa-solid fa-building mr-2 text-black"></i></td>
+                            <td>{{entity.code}}</td>
                             <td>{{entity.name}}</td>
                             <td>{{entity.description}}</td>
+                            <td><span [class]="'btn btn-'+entity.color">.</span></td>
                             <td>{{entity.status}}</td>
                             <td>{{entity.created_at | date:'dd/MM/yyyy'}}</td>
                             <td>
@@ -67,6 +71,27 @@
                     <h5>Información general</h5>
                     <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
                     <textarea [(ngModel)]="description" class="form-control shadow mt-3" rows="3" placeholder="Digite una descripcion"></textarea>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="container">
+                                <select class="form-select shadow mt-3" [(ngModel)]="color" aria-label="Default select example">
+                                    <option selected value="primary">Azul</option>
+                                    <option value="success">Verde</option>
+                                    <option value="info">Azul claro</option>
+                                    <option value="dark">Oscuro</option>
+                                    <option value="secondary">Gris</option>
+                                    <option value="danger">Rojo</option>
+                                    <option value="warning">Amarillo</option>
+                                  </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="container">
+                                <input type="text" [(ngModel)]="code" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+                            </div>
+                        </div>
+                    </div>
+
                     <button *ngIf="!loading" [disabled]="name==='' || description===''" class="btn btn-success btn-block btn-lg mt-4 mb-3 shadow" (click)="save()">
                         Registrar
                     </button>

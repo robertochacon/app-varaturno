@@ -8,10 +8,11 @@ import { HelperService } from './helper.service';
 })
 export class HomeService {
 
-  url = 'https://rcs-api-services-iffsq.ondigitalocean.app/api/home';
-  // url = 'http://127.0.0.1:8000/api/home';
+  url: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private helper: HelperService) { 
+    this.url =  helper.getUrl('home');
+  }
 
   getAllInfo(): Observable<any>{
     const url = this.url;

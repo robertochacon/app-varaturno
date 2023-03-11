@@ -18,12 +18,18 @@ export class ServicesComponent implements OnInit {
   result = '';
   name = '';
   description = '';
+  color = 'primary';
+  code = '';
+  user_id:any = '';
+  entity_id:any = '';
   listEntities: any[] = [];
 
   constructor(private _entities: ServicesService) { }
 
   ngOnInit(): void {
     this.getAllEntities();
+    this.user_id = localStorage.getItem('user_id');
+    this.entity_id = localStorage.getItem('entity_id');
   }
 
   getAllEntities(){
@@ -54,14 +60,20 @@ export class ServicesComponent implements OnInit {
   reset(){
     this.name = '';
     this.description = '';
+    this.color = 'primary';
+    this.code = '';
   }
   
   save(): void {
 
     this.loading = true;
     let datos = new FormData();
+    datos.append("user_id",this.user_id);
+    datos.append("entity_id",this.entity_id);
     datos.append("name",this.name);
     datos.append("description",this.description);
+    datos.append("color",this.color);
+    datos.append("code",this.code);
     this._entities.setServices(datos).subscribe((response)=>{
       this.loading = false;
       Swal.fire({

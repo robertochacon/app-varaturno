@@ -1,19 +1,37 @@
-<div class="row without-borders d-none d-lg-flex d-md-flex">
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="p-2">
 
-    <app-submenu [page]="'services'"></app-submenu>
+        <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="container p-3 shadow rounded bg-dark" style="height: 98vh;">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jNo82YnmsgA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <div class="container p-3 shadow rounded">
+                    <h2 class="text-dark mb-2">Lista de turnos</h2>
 
-    <div class="col-lg-10 col-md-9 col-sm-12">
-        <div class="container">
+                    <div class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" *ngFor="let turn of listTurns" role="alert" (click)="turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h4 class="text-white">{{ turn.service }}</h4>
+                            </div>
+                            <div class="col-6 text-center">
+                                <h4 class="text-white"><b>Turno:</b> {{ turn.code }}-0{{ turn.id }}</h4>
+                            </div>
+                            <div class="col-6 text-center">
+                                <h4 class="text-white"><b>Hora:</b> {{ turn.created_at | date:'shortTime' }}</h4>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="alert" *ngIf="listTurns.length<=0">
+                        <h4 class="text-secondary">Sin turnos</h4>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
-</div>
-
-<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
-    <div>
-        <img class="mb-3" src="../../../assets/img/devices.svg" width="80%" alt="">
-        <h2 class="mb-3">Utilice una tableta o una pc para visualizar contenido.</h2>
-        <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
-    </div>
 </div>

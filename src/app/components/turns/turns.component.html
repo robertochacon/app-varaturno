@@ -8,20 +8,87 @@
             <hr>
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12">
-                    <div class="container p-3 shadow rounded bg-secondary">
-                        <h3 class="text-white">Solicitar turno</h3>
-                        <div class="alert alert-success shadow text-center" *ngFor="let service of listServices" role="alert" style="cursor: pointer;">
+                    <div class="container p-3 shadow rounded bg-dark">
+
+                        <h3 class="text-white mb-4">Nuevo turno</h3>
+
+                        <div [class]="'alert shadow text-center alert-'+service.color" *ngFor="let service of listServices" role="alert" style="cursor: pointer;" (click)="serviceName=service.name;code=service.code;save()">
                             <h3>{{ service.name }}</h3>
                         </div>
+
+                        <div class="alert" *ngIf="listServices.length<=0">
+                            <h4 class="text-secondary">Sin servicios</h4>
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12">
                     <div class="container p-3 shadow rounded">
-                        <h5>Lista</h5>
+                        <h5 class="text-dark mb-2">Lista</h5>
+
+                        <div class="bg-dark alert shadow" data-bs-toggle="modal" data-bs-target="#wathTurn" *ngFor="let turn of listTurns" role="alert" (click)="turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h4 class="text-white">{{ turn.service }}</h4>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h4 class="text-white"><b>Turno:</b> {{ turn.code }}-0{{ turn.id }}</h4>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <h4 class="text-white"><b>Hora:</b> {{ turn.created_at | date:'shortTime' }}</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert" *ngIf="listTurns.length<=0">
+                            <h4 class="text-secondary">Sin turnos</h4>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal of turn -->
+        <div class="modal fade" id="wathTurn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title text-danger" id="exampleModalLabel">TURNO: <b>{{turnName}}</b></h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-around">
+                            <div class="col-4">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                    <img src="../../../assets/img/speaker.png" width="50px" alt=""><br>
+                                    <b>Llamar</b>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                    <img src="../../../assets/img/wait.png" width="50px" alt=""><br>
+                                    <b>Posponer</b>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="container pt-2 pb-2 text-center text-white shadow rounded bg-dark">
+                                    <img src="../../../assets/img/delete_ticket.png" width="50px" alt=""><br>
+                                    <b>Cancelar</b>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Trasladar al puesto -></h5>
+                        <hr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 </div>

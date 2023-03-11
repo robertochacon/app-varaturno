@@ -11,7 +11,7 @@ export class HelperService {
 
   constructor() {
     if(this.enviroment == 'prod'){
-      this.url = 'https://services.cmdpenaromero.com';
+      this.url = '';
     }else if(this.enviroment == 'dev'){
       this.url = 'http://127.0.0.1:8001';
     }
