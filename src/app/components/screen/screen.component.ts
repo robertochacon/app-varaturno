@@ -45,8 +45,8 @@ export class ScreenComponent implements OnInit {
       broadcaster: 'pusher',
       cluster: 'mt1',
       key: 'RCA090698',
-      wsHost: window.location.hostname,
-      wsPort: 6001,
+      wsHost: 'localhost',
+      // wsHost: '27.0.174.165',
       forceTLS: false,
       disableStats: true,
       enabledTransports: ['ws']
@@ -83,18 +83,5 @@ export class ScreenComponent implements OnInit {
       return 'info';
     }
   }
-
-  // speak(msg:string, status:string){
-  //   if(status=='call'){
-  //     let voice = new SpeechSynthesisUtterance();
-  //     voice.text = "Turno ";
-  //     window.speechSynthesis.speak(voice);
-  //     setTimeout(()=>{
-  //       voice.text = msg;
-  //       window.speechSynthesis.speak(voice);
-  //     },1000);
-  //   }
-
-  // }
 
 }

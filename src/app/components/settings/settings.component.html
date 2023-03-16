@@ -3,7 +3,53 @@
     <app-submenu [page]="'services'"></app-submenu>
 
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <div class="container">
+        <div class="container p-5">
+            <h3>Configuraciones</h3>
+            <hr>
+            <div class="row justify-content-start p-3">
+                <div class="col-12">
+                    <h4>Perfil de usuario</h4>
+                </div>
+                <div class="col-6">
+                    <h6 class="text-secondary">Cambiar contraseña</h6>
+                    <input type="text" [(ngModel)]="password" class="form-control shadow" maxLength="11" placeholder="Contraseña anterior">
+                    <input type="text" [(ngModel)]="password" class="form-control shadow mt-2" maxLength="11" placeholder="Contraseña nueva">
+                </div>
+                <div class="col-6 d-flex align-items-end">
+                    <button [disabled]="password===''" class="btn btn-success shadow" (click)="save()">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row justify-content-start p-3">
+                <div class="col-12">
+                    <h3>Entidad</h3>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6 class="text-secondary">Nombre</h6>
+                            <input type="text" [(ngModel)]="link_url" class="form-control shadow" maxLength="11" placeholder="Digite un nombre">
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-secondary">Puestos</h6>
+                            <input type="number" [(ngModel)]="link_url" class="form-control shadow" maxLength="11" placeholder="Cantidad de puestos">
+                        </div>
+                    </div>
+                    <div class="col-12 pt-2">
+                        <h6 class="text-secondary">Cambiar url de video</h6>
+                        <input type="url" [(ngModel)]="link_url" class="form-control shadow" maxLength="11" placeholder="Url">
+                    </div>
+                </div>
+                <div class="col-6 d-flex align-items-end">
+                    <button [disabled]="link_url===''" class="btn btn-success shadow" (click)="save_url()">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+            <hr>
+
 
         </div>
     </div>

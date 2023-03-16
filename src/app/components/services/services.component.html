@@ -55,7 +55,7 @@
 
         <div class="container pt-3" *ngIf="action==='register'">
             <div class="row mt-2">
-                <h3>Registro de entidad</h3>
+                <h3>Registro de servicio</h3>
                 <div class="col-6 text-start">
                     <p class="btn btn-secondary mt-1" (click)="action='list';reloadDataTable()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
                 </div>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-6">
                             <div class="container">
-                                <input type="text" [(ngModel)]="code" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un nombre">
+                                <input type="text" [(ngModel)]="code" class="form-control shadow mt-3" maxLength="11" placeholder="Digite un codigo">
                             </div>
                         </div>
                     </div>
