@@ -45,10 +45,11 @@ export class ScreenComponent implements OnInit {
       broadcaster: 'pusher',
       cluster: 'mt1',
       key: 'RCA090698',
-      wsHost: 'localhost',
+      // wsHost: window.location.hostname,
+      wsHost: 'api.varaturno.com',
       // wsHost: '27.0.174.165',
       forceTLS: false,
-      disableStats: true,
+      // wsPort: 6001,
       enabledTransports: ['ws']
     });
 
@@ -56,6 +57,7 @@ export class ScreenComponent implements OnInit {
       console.log(resp);
       this.getAllTurns();
       if(typeof resp.msg === 'object'){
+        console.log('yes is object')
         this.voice(resp.msg)
       }
     });
@@ -63,15 +65,19 @@ export class ScreenComponent implements OnInit {
   }
 
   voice(msg:any){
-    const synth = window.speechSynthesis;
-    const utterThis = new SpeechSynthesisUtterance('Turno '+msg.turno);
+
+    let synth = window.speechSynthesis
+    let text = "Turno "+msg.turno;
+    let utterThis = new SpeechSynthesisUtterance(text)
     utterThis.lang = 'es-ES';
-    synth.speak(utterThis);
+    synth.speak(utterThis)
+
     setTimeout(()=>{
-      const utterThis = new SpeechSynthesisUtterance('Favor pasar al puesto '+msg.puesto);
+      let utterThis = new SpeechSynthesisUtterance('Favor pasar al puesto'+msg.puesto);
       utterThis.lang = 'es-ES';
       synth.speak(utterThis);
     },1000);
+
   }
 
   returnColor(status:string){

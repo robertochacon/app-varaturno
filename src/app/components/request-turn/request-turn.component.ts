@@ -23,6 +23,7 @@ export class RequestTurnComponent implements OnInit {
   listWindows: any[] = [];
   listServices: any[] = [];
   listTurns: any[] = [];
+  mywindow: any;
 
   constructor(private _services: ServicesService, private _turns: TurnsService) { }
 
@@ -66,11 +67,12 @@ export class RequestTurnComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Completado',
-        text: 'El turno '+response.data.code+response.data.id+' ha sido registrado.',
+        title: 'Su turno es '+response.data.code+'-'+response.data.id,
+        text: 'Favor tomar su ticket',
         showConfirmButton: false,
-        timer: 4000
+        timer: 5000
       });
+      this.PrintTurn(response.data.code+'-'+response.data.id);
       this.getAllTurns();
     },error => {
       Swal.fire({
@@ -104,5 +106,24 @@ export class RequestTurnComponent implements OnInit {
     })
 
   }
+
+  PrintTurn(turn: any)
+{
+    this.mywindow = window.open('', 'PRINT', 'height=200,width=100');
+
+    this.mywindow.document.write('<html><head><title>Varaturno</title>');
+    this.mywindow.document.write('</head><body>');
+    this.mywindow.document.write('<br><center><h1>Turno</h1></center>');
+    this.mywindow.document.write('<center><h1>' + turn + '</h1></center><br>');
+    this.mywindow.document.write('</body></html>');
+
+    this.mywindow.document.close(); // necessary for IE >= 10
+    this.mywindow.focus(); // necessary for IE >= 10*/
+
+    this.mywindow.print();
+    this.mywindow.close();
+
+    return true;
+}
 
 }
