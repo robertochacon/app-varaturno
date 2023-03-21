@@ -4,13 +4,14 @@
 
     <div class="col-lg-10 col-md-10 col-sm-10">
         <div class="container p-3">
-            <h3>Turnos</h3>
+            <h3>Gestionar turnos</h3>
             <hr>
             <div class="row">
                 <div class="col-lg-5 col-md-5 col-sm-12">
                     <div class="container p-3 shadow rounded" style="background-color:#050a30;">
 
-                        <h3 class="text-white mb-4">Nuevo turno</h3>
+                        <h3 class="text-white mb-1">Nuevo turno</h3>
+                        <h5 class="text-secondary mb-4">Seleccione un servicio</h5>
 
                         <div [class]="'alert shadow text-center alert-'+service.color" *ngFor="let service of listServices" role="alert" style="cursor: pointer;" (click)="serviceName=service.name;code=service.code;save()">
                             <h3>{{ service.name }}</h3>
@@ -30,13 +31,13 @@
                             <div *ngIf="turn.status!='cancel'" [class]="'alert shadow bg-'+returnColor(turn.status)" data-bs-toggle="modal" data-bs-target="#wathTurn" role="alert" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">
                                 <div class="row">
                                     <div class="col-4 text-center">
-                                        <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
+                                        <h5 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h5>
                                     </div>
                                     <div class="col-4 text-center">
-                                        <h4 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h4>
+                                        <h5 class="text-white"><b>Puesto:</b><br>{{ turn.window }}</h5>
                                     </div>
                                     <div class="col-4 text-center">
-                                        <h4 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h4>
+                                        <h5 class="text-white"><b>Hora:</b><br>{{ turn.created_at | date:'shortTime' }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +45,7 @@
 
 
                         <div class="alert" *ngIf="listTurns.length<=0">
-                            <h4 class="text-secondary">Sin turnos</h4>
+                            <h5 class="text-secondary">Sin turnos</h5>
                         </div>
 
                     </div>

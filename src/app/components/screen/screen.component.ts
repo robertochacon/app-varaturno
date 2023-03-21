@@ -13,6 +13,7 @@ export class ScreenComponent implements OnInit {
   loading = false;
   loadData = false;
   listTurns: any[] = [];
+  callTurn: any = false;
 
   constructor(private _services: ServicesService, private _turns: TurnsService) { }
 
@@ -57,28 +58,32 @@ export class ScreenComponent implements OnInit {
       console.log(resp);
       this.getAllTurns();
       if(typeof resp.msg === 'object'){
+        this.callTurn = true;
+        setTimeout(()=>{
+          this.callTurn = false;
+        },3000);
         console.log('yes is object')
-        this.voice(resp.msg)
+        // this.voice(resp.msg)
       }
     });
 
   }
 
-  voice(msg:any){
+  // voice(msg:any){
 
-    let synth = window.speechSynthesis
-    let text = "Turno "+msg.turno;
-    let utterThis = new SpeechSynthesisUtterance(text)
-    utterThis.lang = 'es-ES';
-    synth.speak(utterThis)
+  //   let synth = window.speechSynthesis
+  //   let text = "Turno "+msg.turno;
+  //   let utterThis = new SpeechSynthesisUtterance(text)
+  //   utterThis.lang = 'es-ES';
+  //   synth.speak(utterThis)
 
-    setTimeout(()=>{
-      let utterThis = new SpeechSynthesisUtterance('Favor pasar al puesto'+msg.puesto);
-      utterThis.lang = 'es-ES';
-      synth.speak(utterThis);
-    },1000);
+  //   setTimeout(()=>{
+  //     let utterThis = new SpeechSynthesisUtterance('Favor pasar al puesto'+msg.puesto);
+  //     utterThis.lang = 'es-ES';
+  //     synth.speak(utterThis);
+  //   },1000);
 
-  }
+  // }
 
   returnColor(status:string){
     if(status=='call'){
