@@ -109,12 +109,14 @@ export class RequestTurnComponent implements OnInit {
 
   PrintTurn(turn: any)
 {
+  console.log('good');
+  
     this.mywindow = window.open('', 'PRINT', 'height=200,width=100');
 
     this.mywindow.document.write('<html><head><title>Varaturno</title>');
     this.mywindow.document.write('</head><body>');
-    this.mywindow.document.write('<br><center><h1>Turno</h1></center>');
-    this.mywindow.document.write('<center><h1>' + turn + '</h1></center><br>');
+    this.mywindow.document.write('<h1>TURNO: ' + turn + '</h1>');
+    this.mywindow.document.write('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCRmCS1UF8zZm7to0ULVATi9Ahht1iSPSG8AXxxLd52w&s"><br>');
     this.mywindow.document.write('</body></html>');
 
     this.mywindow.document.close(); // necessary for IE >= 10

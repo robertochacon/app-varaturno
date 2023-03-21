@@ -1,0 +1,116 @@
+<div class="row justify-content-end without-borders d-none d-lg-flex d-md-flex">
+
+    <app-submenu [page]="'users'"></app-submenu>
+
+    <div class="col-lg-10 col-md-10 col-sm-10">
+
+        <div class="container pt-3 text-center" *ngIf="action==='list'">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h3>Lista de pacientes</h3>
+                </div>
+                <div class="col-lg-0 text-start">
+                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></p>
+                </div>
+            </div>
+
+            <div class="pt-5" *ngIf="loading">
+                <h3>Cargando</h3>
+                <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                <table class="table table-hover responsive" id="listPatients" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Identificacion</th>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Telefono</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th>Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let patient of listPatients" class="text-start">
+                            <td><i class="fa-solid fa-user mr-2 text-black"></i></td>
+                            <td>{{patient.identification}}</td>
+                            <td>{{patient.name}}</td>
+                            <td>{{patient.age}}</td>
+                            <td>{{patient.phone}}</td>
+                            <td>{{patient.service}}</td>
+                            <td>{{patient.status}}</td>
+                            <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
+                            <td>
+                                <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container p-5" *ngIf="action==='register'">
+            <div class="row mt-2">
+                <h3>Registro de paciente</h3>
+                <div class="col-6 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="action='list';reloadDataTable()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+                </div>
+            </div>
+            <div class="row justify-content-around allscreen">
+
+                <div class="col-lg-5 col-md-5 col-sm-10 text-center">
+                    <img src="../../../assets/img/add_documents.svg" alt="" width="60%">
+                    <h2></h2>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 shadow text-center border-radio pt-3">
+                    <div class="alert alert-success" role="alert" *ngIf="result === 'ok'">
+                        Registro completado.
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="result === 'fail'">
+                        No se pudo completar su registro.
+                    </div>
+                    <h5>Información general</h5>
+                    <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Identificacion">
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Nombre">
+                    <div class="row">
+                        <div class="col-8">
+                            <input type="text" [(ngModel)]="phone" class="form-control shadow mt-3" maxLength="11" placeholder="Telefono">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" [(ngModel)]="age" class="form-control shadow mt-3" maxLength="11" placeholder="Edad">
+                        </div>
+                    </div>
+                    <textarea [(ngModel)]="address" class="form-control mt-3" id="" cols="30" rows="3" placeholder="Direccion"></textarea>
+                    <select class="form-control shadow mt-3" [(ngModel)]="service">
+                        <option value="null">Selecione un servicio</option>
+                    </select>
+                    <button *ngIf="!loading" [disabled]="name==='' || identification===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
+                        Registrar
+                    </button>
+                    <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Registrando...
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
+    <div>
+        <img class="mb-3" src="../../../assets/img/devices.svg" width="80%" alt="">
+        <h2 class="mb-3">Utilice una tableta o una pc para visualizar contenido.</h2>
+        <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
+    </div>
+</div>

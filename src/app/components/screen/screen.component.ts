@@ -14,6 +14,7 @@ export class ScreenComponent implements OnInit {
   loadData = false;
   listTurns: any[] = [];
   callTurn: any = false;
+  env:any = 'dev';
 
   constructor(private _services: ServicesService, private _turns: TurnsService) { }
 
@@ -42,17 +43,30 @@ export class ScreenComponent implements OnInit {
   }
 
   websockets(){
-    const echo = new Echo({
-      broadcaster: 'pusher',
-      cluster: 'mt1',
-      key: 'RCA090698',
-      // wsHost: window.location.hostname,
-      // wsHost: 'api.varaturno.com',
-      wsHost: '27.0.174.165',
-      forceTLS: false,
-      // wsPort: 6001,
-      enabledTransports: ['ws']
-    });
+
+    let config;
+    if(this.env==='dev'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: window.location.hostname,
+        forceTLS: false,
+        wsPort: 6001,
+        enabledTransports: ['ws']
+      }
+    }else if(this.env==='prod'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: '27.0.174.165',
+        forceTLS: false,
+        enabledTransports: ['ws']
+      }
+    }
+
+    const echo = new Echo(config);
 
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
       console.log(resp);
