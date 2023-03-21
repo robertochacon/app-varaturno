@@ -47,8 +47,8 @@ export class ScreenComponent implements OnInit {
       cluster: 'mt1',
       key: 'RCA090698',
       // wsHost: window.location.hostname,
-      wsHost: 'api.varaturno.com',
-      // wsHost: '27.0.174.165',
+      // wsHost: 'api.varaturno.com',
+      wsHost: '27.0.174.165',
       forceTLS: false,
       // wsPort: 6001,
       enabledTransports: ['ws']
