@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 import { ServicesService } from 'src/app/services/services.service';
 import { TurnsService } from 'src/app/services/turns.service';
 import Swal from 'sweetalert2'
+declare const $: any;
 
 @Component({
   selector: 'app-turns',
@@ -20,11 +22,15 @@ export class TurnsComponent implements OnInit {
   user_id:any = '';
   entity_id:any = '';
   windows:any = '';
+  firstTurnInProcess: any;
   listWindows: any[] = [];
   listServices: any[] = [];
   listTurns: any[] = [];
+  listTurnsCalls: any[] = [];
+  listTurnsInProcess: any[] = [];
+  listTurnsDone: any[] = [];
 
-  constructor(private _services: ServicesService, private _turns: TurnsService) { }
+  constructor(private _services: ServicesService, private _turns: TurnsService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getAllServices();
@@ -96,9 +102,17 @@ export class TurnsComponent implements OnInit {
     this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
+      //array list with filter by status
+      this.listTurnsInProcess = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
+      this.listTurnsCalls = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
+      this.listTurnsDone = this.listTurns.filter((item: { status: string; }) => item.status == 'done');
+
+      this.firstTurnInProcess = this.listTurnsInProcess[0];
 
       setTimeout(function(){
-        console.log(response.data);
+        $('#listTurnsInProcess').DataTable();
+        $('#listTurnsCalls').DataTable();
+        $('#listTurnsDone').DataTable();
       },100);
       this.loading = false;
       
@@ -123,6 +137,11 @@ export class TurnsComponent implements OnInit {
     datos.append("status",status);
     this._turns.updateTurns(this.selectTurn, datos).subscribe((response)=>{
       this.getAllTurns();
+      if(status=="done"){
+        setTimeout(()=>{
+          this._router.navigate(['/patients']);
+        },2000);
+      }
     },error => {
       Swal.fire({
         position: 'center',
@@ -172,6 +191,23 @@ export class TurnsComponent implements OnInit {
     }else{
       return 'info';
     }
+  }
+
+  setNextTurn(status:string){
+    let datos = new FormData();
+    datos.append("status",status);
+    this._turns.updateTurns(this.firstTurnInProcess.id, datos).subscribe((response)=>{
+      this.getAllTurns();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
   }
 
 }

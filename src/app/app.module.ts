@@ -18,6 +18,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ScreenComponent } from './components/screen/screen.component';
 import { RequestTurnComponent } from './components/request-turn/request-turn.component';
 import { PatientsComponent } from './components/patients/patients.component';
+import { ModalPasswordComponent } from './components/modal-password/modal-password.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PatientsComponent } from './components/patients/patients.component';
     ScreenComponent,
     RequestTurnComponent,
     PatientsComponent,
+    ModalPasswordComponent,
   ],
   imports: [
     BrowserModule,

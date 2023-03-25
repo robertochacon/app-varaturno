@@ -14,17 +14,22 @@ export class PatientsService {
     this.url =  helper.getUrl('patients');
   }
 
-  getAllUsers(): Observable<any>{
+  getAllPatients(): Observable<any>{
     const url = this.url;
     return this.http.get(url);
   }
 
-  setUsers(json: any): Observable<any>{
+  setPatients(json: any): Observable<any>{
     const url = this.url;
     return this.http.post(url, json);
   }
 
-  deleteUsers(id: number): Observable<any>{
+  updatePatient(id: number, json: any): Observable<any>{
+    const url = this.url+'/update/'+id;
+    return this.http.post(url, json);
+  }
+
+  deletePatients(id: number): Observable<any>{
     const url = this.url+'/delete/'+id;
     return this.http.post(url, id);
   }

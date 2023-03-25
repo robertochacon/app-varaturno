@@ -2,7 +2,7 @@
 
     <app-submenu [page]="'users'"></app-submenu>
 
-    <div class="col-lg-10 col-md-10 col-sm-10">
+    <div class="col-lg-10 col-md-10 col-sm-10 pt-3">
 
         <div class="container pt-3 text-center" *ngIf="action==='list'">
             <div class="d-flex justify-content-between align-items-center">
@@ -10,7 +10,8 @@
                     <h3>Lista de pacientes</h3>
                 </div>
                 <div class="col-lg-0 text-start">
-                    <p class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></p>
+                    <button class="btn btn-success mt-1 mr-2" [disabled]="listPatientsInProcess.length===0" (click)="setStatusTurn('call')"><span class="d-none d-lg-block d-md-block"> Llamar siguiente paciente</span></button>
+                    <button class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></button>
                 </div>
             </div>
 
@@ -21,47 +22,96 @@
                 </div>
             </div>
 
-            <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-                <table class="table table-hover responsive" id="listPatients" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Identificacion</th>
-                            <th>Nombre</th>
-                            <th>Edad</th>
-                            <th>Telefono</th>
-                            <th>Servicio</th>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>Accion</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let patient of listPatients" class="text-start">
-                            <td><i class="fa-solid fa-user mr-2 text-black"></i></td>
-                            <td>{{patient.identification}}</td>
-                            <td>{{patient.name}}</td>
-                            <td>{{patient.age}}</td>
-                            <td>{{patient.phone}}</td>
-                            <td>{{patient.service}}</td>
-                            <td>{{patient.status}}</td>
-                            <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
-                            <td>
-                                <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="container p-5" *ngIf="action==='register'">
-            <div class="row mt-2">
-                <h3>Registro de paciente</h3>
-                <div class="col-6 text-start">
-                    <p class="btn btn-secondary mt-1" (click)="action='list';reloadDataTable()"><span><i class="fa-solid fa-arrow-left"></i></span></p>
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-process" type="button" role="tab" aria-controls="nav-process" aria-selected="true">Pacientes en espera</button>
+                    <button class="nav-link" id="nav-calls-tab" data-bs-toggle="tab" data-bs-target="#nav-calls" type="button" role="tab" aria-controls="nav-calls" aria-selected="false">Pacientes llamados</button>
+                </div>
+            </nav>
+            <div class="tab-content pt-3" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">
+                    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                        <table class="table table-hover responsive" id="listPatientsInProcess" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Identificacion</th>
+                                    <th>Nombre</th>
+                                    <th>Edad</th>
+                                    <th>Telefono</th>
+                                    <th>Servicio</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patient of listPatientsInProcess" class="text-start">
+                                    <td><i class="fa-solid fa-user mr-2 text-black"></i></td>
+                                    <td>{{patient.identification}}</td>
+                                    <td>{{patient.name}}</td>
+                                    <td>{{patient.age}}</td>
+                                    <td>{{patient.phone}}</td>
+                                    <td>{{patient.service}}</td>
+                                    <td>{{patient.status}}</td>
+                                    <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
+                                    <td>
+                                        <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-calls" role="tabpanel" aria-labelledby="nav-calls-tab">
+                    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                        <table class="table table-hover responsive" id="listPatientsCalls" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Identificacion</th>
+                                    <th>Nombre</th>
+                                    <th>Edad</th>
+                                    <th>Telefono</th>
+                                    <th>Servicio</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let patient of listPatientsCalls" class="text-start">
+                                    <td><i class="fa-solid fa-user mr-2 text-black"></i></td>
+                                    <td>{{patient.identification}}</td>
+                                    <td>{{patient.name}}</td>
+                                    <td>{{patient.age}}</td>
+                                    <td>{{patient.phone}}</td>
+                                    <td>{{patient.service}}</td>
+                                    <td>{{patient.status}}</td>
+                                    <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
+                                    <td>
+                                        <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="container p-3" *ngIf="action==='register'">
+
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="">
+                    <h3>Registro de paciente</h3>
+                </div>
+                <div class="col-lg-0 text-start">
+                    <p class="btn btn-secondary mt-1" (click)="action='list';reloadDataTable()"><span><i class="fa-solid fa-arrow-left"></i> Ver lista de pacientes</span></p>
+                </div>
+            </div>
+
             <div class="row justify-content-around allscreen">
 
                 <div class="col-lg-5 col-md-5 col-sm-10 text-center">
@@ -89,7 +139,8 @@
                     </div>
                     <textarea [(ngModel)]="address" class="form-control mt-3" id="" cols="30" rows="3" placeholder="Direccion"></textarea>
                     <select class="form-control shadow mt-3" [(ngModel)]="service">
-                        <option value="null">Selecione un servicio</option>
+                        <option selected value="null">Selecione un servicio</option>
+                        <option *ngFor="let service of listServices" value="{{ service.name }}">{{ service.name }}</option>
                     </select>
                     <button *ngIf="!loading" [disabled]="name==='' || identification===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
                         Registrar

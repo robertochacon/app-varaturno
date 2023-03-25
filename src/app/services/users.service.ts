@@ -24,6 +24,11 @@ export class UsersService {
     return this.http.post(url, json);
   }
 
+  updateUsersPassword(id: any, json: any): Observable<any>{
+    const url = this.url+'/reset_password/'+id;
+    return this.http.post(url, json);
+  }
+
   deleteUsers(id: number): Observable<any>{
     const url = this.url+'/delete/'+id;
     return this.http.post(url, id);

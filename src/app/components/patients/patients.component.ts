@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { EntitiesService } from 'src/app/services/entities.service';
+import { ServicesService } from 'src/app/services/services.service';
 import { PatientsService } from 'src/app/services/patients.service';
 import Swal from 'sweetalert2'
 declare const $: any;
@@ -26,25 +26,36 @@ export class PatientsComponent implements OnInit {
   service = 'null';
   entity_id:any = '';
   listPatients: any[] = [];
-  listEntities: any[] = [];
+  listPatientsCalls: any[] = [];
+  listPatientsInProcess: any[] = [];
+  listServices: any[] = [];
+  firstPatient: any;
 
-  constructor(private _patient: PatientsService, private _entities: EntitiesService) { }
+  constructor(private _patient: PatientsService, private _services: ServicesService) { }
 
   ngOnInit(): void {
-    this.getAllUsers();
-    this.getAllEntities();
+    this.getAllPatients();
+    this.getAllServices();
     this.entity_id = localStorage.getItem('entity_id');
   }
 
-  getAllUsers(){
+  getAllPatients(){
     this.loading = true;
 
-    this._patient.getAllUsers().subscribe((response)=>{
+    this._patient.getAllPatients().subscribe((response)=>{
 
       this.listPatients = response.data;
 
+      //lista filtrando por status
+      this.listPatientsCalls = this.listPatients.filter((item: { status: string; }) => item.status == 'call');
+      this.listPatientsInProcess = this.listPatients.filter((item: { status: string; }) => item.status == 'process');
+
+      //obteniendo primero de la lista en proceso
+      this.firstPatient = this.listPatientsInProcess[0];
+
       setTimeout(function(){
-        $('#listPatients').DataTable();
+        $('#listPatientsInProcess').DataTable();
+        $('#listPatientsCalls').DataTable();
       },100);
       this.loading = false;
       
@@ -57,14 +68,15 @@ export class PatientsComponent implements OnInit {
 
   reloadDataTable(){
     setTimeout(function(){
-      $('#listPatients').DataTable();
+      $('#listPatientsInProcess').DataTable();
+      $('#listPatientsCalls').DataTable();
     },100);
   }
 
-  getAllEntities(){
-    this._entities.getAllEntities().subscribe((response)=>{
-      this.listEntities = response.data;
-      console.log(this.listEntities);
+  getAllServices(){
+    this._services.getAllServices().subscribe((response)=>{
+      this.listServices = response.data;
+      console.log(this.listServices);
     }, error=>{
       // this.listMessengers = [];
     })
@@ -88,9 +100,10 @@ export class PatientsComponent implements OnInit {
     datos.append("phone",this.phone);
     datos.append("age",this.age);
     datos.append("address",this.address);
+    datos.append("service",this.service);
     // datos.append("file",this.file);
 
-    this._patient.setUsers(datos).subscribe((response)=>{
+    this._patient.setPatients(datos).subscribe((response)=>{
       this.loading = false;
       Swal.fire({
         position: 'center',
@@ -100,7 +113,7 @@ export class PatientsComponent implements OnInit {
         timer: 2000
       });
       this.reset();
-      this.getAllUsers();
+      this.getAllPatients();
     },error => {
       Swal.fire({
         position: 'center',
@@ -128,7 +141,7 @@ export class PatientsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-      this._patient.deleteUsers(id).subscribe((response)=>{
+      this._patient.deletePatients(id).subscribe((response)=>{
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -136,7 +149,7 @@ export class PatientsComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000
         });
-        this.getAllUsers();
+        this.getAllPatients();
       },error => {
         Swal.fire({
           position: 'center',
@@ -153,5 +166,25 @@ export class PatientsComponent implements OnInit {
 
   }
 
+  setStatusTurn(status:string): void {
+
+    let datos = new FormData();
+    datos.append("status",status);
+    this._patient.updatePatient(this.firstPatient.id, datos).subscribe((response)=>{
+      console.log(this.firstPatient);
+      
+      this.getAllPatients();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+
+  }
 
 }

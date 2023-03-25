@@ -77,7 +77,8 @@
         <img src="../../../assets/img/users.png" width="50px" alt="">
         <b class="text-white d-block">Empleados</b>
     </a>
-    <a routerLink="/settings" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
+    <a data-bs-toggle="modal" data-bs-target="#changePassword" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center" style="cursor: pointer;">
+        <!-- <a routerLink="/settings" data-bs-toggle="modal" data-bs-target="#changePassword" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center"> -->
         <img src="../../../assets/img/settings.png" width="50px" alt="">
         <b class="text-white d-block">Configuracion</b>
     </a>
@@ -87,4 +88,5 @@
     </a>
 </div>
 
+<app-modal-password></app-modal-password>
 <!-- </div> -->

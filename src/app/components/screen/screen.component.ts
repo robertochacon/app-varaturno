@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/services/services.service';
 import { TurnsService } from 'src/app/services/turns.service';
+import { PatientsService } from 'src/app/services/patients.service';
 import Echo from 'laravel-echo';
 
 @Component({
@@ -13,13 +14,15 @@ export class ScreenComponent implements OnInit {
   loading = false;
   loadData = false;
   listTurns: any[] = [];
+  listPatients: any[] = [];
   callTurn: any = false;
   env:any = 'dev';
 
-  constructor(private _services: ServicesService, private _turns: TurnsService) { }
+  constructor(private _services: ServicesService, private _turns: TurnsService, private _patient: PatientsService) { }
 
   ngOnInit(): void {
     this.getAllTurns();
+    this.getAllPatients();
     this.websockets();
   }
 
@@ -33,6 +36,21 @@ export class ScreenComponent implements OnInit {
       setTimeout(function(){
         console.log(response.data);
       },100);
+      this.loading = false;
+      
+    }, error=>{
+        this.loadData = false;
+        this.loading = false;
+    })
+
+  }
+
+  getAllPatients(){
+    this.loading = true;
+
+    this._patient.getAllPatients().subscribe((response)=>{
+
+      this.listPatients = response.data.filter((item: { status: string; }) => item.status == 'call');
       this.loading = false;
       
     }, error=>{
