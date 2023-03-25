@@ -40,7 +40,6 @@
                                     <th>Edad</th>
                                     <th>Telefono</th>
                                     <th>Servicio</th>
-                                    <th>Estado</th>
                                     <th>Fecha</th>
                                     <th>Accion</th>
                                 </tr>
@@ -53,9 +52,9 @@
                                     <td>{{patient.age}}</td>
                                     <td>{{patient.phone}}</td>
                                     <td>{{patient.service}}</td>
-                                    <td>{{patient.status}}</td>
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
                                     <td>
+                                        <button class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'call')">Llamar</button>
                                         <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>
@@ -74,7 +73,6 @@
                                     <th>Edad</th>
                                     <th>Telefono</th>
                                     <th>Servicio</th>
-                                    <th>Estado</th>
                                     <th>Fecha</th>
                                     <th>Accion</th>
                                 </tr>
@@ -87,9 +85,9 @@
                                     <td>{{patient.age}}</td>
                                     <td>{{patient.phone}}</td>
                                     <td>{{patient.service}}</td>
-                                    <td>{{patient.status}}</td>
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
                                     <td>
+                                        <button class="btn btn-secondary mr-2" (click)="setStatusTurnId(patient.id, 'process')">Cola</button>
                                         <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>

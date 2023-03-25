@@ -53,7 +53,7 @@
         <img src="../../../assets/img/home.png" width="50px" alt="">
         <b class="text-white d-block">Dashboard</b>
     </a>
-    <a routerLink="/entities" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
+    <a routerLink="/entities" *ngIf="role==='super_admin'" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="../../../assets/img/entities.png" width="50px" alt="">
         <b class="text-white d-block">Entidades</b>
     </a>
@@ -78,12 +78,11 @@
         <b class="text-white d-block">Empleados</b>
     </a>
     <a data-bs-toggle="modal" data-bs-target="#changePassword" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center" style="cursor: pointer;">
-        <!-- <a routerLink="/settings" data-bs-toggle="modal" data-bs-target="#changePassword" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center"> -->
         <img src="../../../assets/img/settings.png" width="50px" alt="">
         <b class="text-white d-block">Configuracion</b>
     </a>
     <a (click)="salir()" class="p-3 btns text-center">
-        <img src="../../../assets/img/exit.png" width="50px" alt="">
+        <img src="../../../assets/img/exit.png" width="50px" alt="" style="cursor: pointer;">
         <b class="text-white d-block">Salir</b>
     </a>
 </div>

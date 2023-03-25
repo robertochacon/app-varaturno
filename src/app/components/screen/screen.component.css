@@ -1,0 +1,5 @@
+.fondo {
+    background-image: url('../../../assets/img/fondo-screen.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}

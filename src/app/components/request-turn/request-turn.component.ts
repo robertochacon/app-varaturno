@@ -12,6 +12,7 @@ export class RequestTurnComponent implements OnInit {
 
   loading = false;
   loadData = false;
+  action = 'start';
   result = '';
   selectTurn:any = '';
   turnName = '';

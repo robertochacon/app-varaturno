@@ -187,4 +187,23 @@ export class PatientsComponent implements OnInit {
 
   }
 
+  setStatusTurnId(id:number, status:string): void {
+
+    let datos = new FormData();
+    datos.append("status",status);
+    this._patient.updatePatient(id, datos).subscribe((response)=>{      
+      this.getAllPatients();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+
+  }
+
 }
