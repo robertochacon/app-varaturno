@@ -78,7 +78,7 @@ export class ScreenComponent implements OnInit {
         broadcaster: 'pusher',
         cluster: 'mt1',
         key: 'RCA090698',
-        wsHost: '27.0.174.165',
+        wsHost: '161.22.44.200',
         forceTLS: false,
         enabledTransports: ['ws']
       }
