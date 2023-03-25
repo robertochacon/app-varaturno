@@ -10,6 +10,7 @@ import { EntitiesComponent } from './components/entities/entities.component';
 import { UsersComponent } from './components/users/users.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { PatientsComponent } from './components/patients/patients.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'entities', component: EntitiesComponent},
   {path: 'users', component: UsersComponent},
+  {path: 'patients', component: PatientsComponent},
   {path: 'services', component: ServicesComponent},
   {path: 'screen', component: ScreenComponent},
   {path: 'turns', component: TurnsComponent},

@@ -46,14 +46,14 @@
 </nav> -->
 
 <div class="menu shadow">
-    <a class="" class="p-3 btns text-center">
+    <!-- <a class="" class="p-3 btns text-center">
         <img src="../../../assets/img/valeturno.png" class="" width="100px" alt="" style="border-radius: 5px 5px;">
-    </a>
+    </a> -->
     <a routerLink="/dashboard" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="../../../assets/img/home.png" width="50px" alt="">
         <b class="text-white d-block">Dashboard</b>
     </a>
-    <a routerLink="/entities" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
+    <a routerLink="/entities" *ngIf="role==='super_admin'" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="../../../assets/img/entities.png" width="50px" alt="">
         <b class="text-white d-block">Entidades</b>
     </a>
@@ -69,18 +69,23 @@
         <img src="../../../assets/img/terminal.png" width="50px" alt="">
         <b class="text-white d-block">Turnos</b>
     </a>
+    <a routerLink="/patients" [ngClass]="page==='patients'?'selected':''" class="p-3 btns text-center">
+        <img src="../../../assets/img/clients.png" width="50px" alt="">
+        <b class="text-white d-block">Pacientes</b>
+    </a>
     <a routerLink="/users" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="../../../assets/img/users.png" width="50px" alt="">
-        <b class="text-white d-block">Usuarios</b>
+        <b class="text-white d-block">Empleados</b>
     </a>
-    <a routerLink="/settings" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
+    <a data-bs-toggle="modal" data-bs-target="#changePassword" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center" style="cursor: pointer;">
         <img src="../../../assets/img/settings.png" width="50px" alt="">
         <b class="text-white d-block">Configuracion</b>
     </a>
     <a (click)="salir()" class="p-3 btns text-center">
-        <img src="../../../assets/img/exit.png" width="50px" alt="">
+        <img src="../../../assets/img/exit.png" width="50px" alt="" style="cursor: pointer;">
         <b class="text-white d-block">Salir</b>
     </a>
 </div>
 
+<app-modal-password></app-modal-password>
 <!-- </div> -->
