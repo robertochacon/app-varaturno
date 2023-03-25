@@ -110,20 +110,25 @@ export class RequestTurnComponent implements OnInit {
 
   PrintTurn(turn: any)
 {
-  console.log('good');
   
-    this.mywindow = window.open('', 'PRINT', 'height=200,width=100');
+    this.mywindow = window.open('', 'PRINT', 'height=180,width=100');
 
-    this.mywindow.document.write('<html><head><title>Varaturno</title>');
-    this.mywindow.document.write('</head><body>');
-    this.mywindow.document.write('<h1>TURNO: ' + turn + '</h1>');
-    this.mywindow.document.write('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCRmCS1UF8zZm7to0ULVATi9Ahht1iSPSG8AXxxLd52w&s"><br>');
-    this.mywindow.document.write('</body></html>');
+    let template = `
+    <html><head><title>Varaturno</title>
+    </head><body>
+    <center><h1>TURNO<br>${turn}</h1></center>
+    <center><img src="../../../assets/img/qr.png" class="shadow mb-4" width="110px" style="margin-top:-20px;border-radius: 5px 5px;"></center>
+    </body></html>
+    `;
+
+    this.mywindow.document.write(template);
 
     this.mywindow.document.close(); // necessary for IE >= 10
     this.mywindow.focus(); // necessary for IE >= 10*/
 
-    this.mywindow.print();
+    setTimeout(() => {
+      this.mywindow.print();
+    }, 10);
     this.mywindow.close();
 
     return true;

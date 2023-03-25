@@ -16,7 +16,7 @@ export class ScreenComponent implements OnInit {
   listTurns: any[] = [];
   listPatients: any[] = [];
   callTurn: any = false;
-  env:any = 'dev';
+  env:any = 'prod';
 
   constructor(private _services: ServicesService, private _turns: TurnsService, private _patient: PatientsService) { }
 
@@ -89,6 +89,7 @@ export class ScreenComponent implements OnInit {
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
       console.log(resp);
       this.getAllTurns();
+      this.getAllPatients();
       if(typeof resp.msg === 'object'){
         this.callTurn = true;
         setTimeout(()=>{
