@@ -11,7 +11,7 @@ export class HelperService {
 
   constructor() {
     if(this.enviroment == 'prod'){
-      this.url = 'http://27.0.174.165';
+      this.url = 'http://161.22.44.200';
     }else if(this.enviroment == 'dev'){
       this.url = 'http://127.0.0.1:8000';
     }
