@@ -1,40 +1,52 @@
 <div class="row justify-content-center without-borders d-none d-lg-flex d-md-flex align-items-center fondo" style="height: 100vh;">
 
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <div class="container pt-5 text-center shadow rounded" style="background-color: rgba(255, 255, 255, 0.8);overflow-y: scroll;height: 90vh;">
-            <img src="../../../assets/img/logo.png" alt="" class="shadow mb-2" width="200px" style="border-radius: 5px 5px;border:10px solid white;">
-            <h1>Laboratorio Clinico Rodriguez</h1>
-            <hr>
+        <div class="container pt-3 text-center shadow rounded" style="background-color: rgba(255, 255, 255, 0.8);overflow-y: scroll;height: 90vh;">
+
             <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-8 col-sm-10 ">
+                <div class="col-lg-10 col-md-10 col-sm-10 ">
                     <div class="container p-3">
 
                         <div *ngIf="action=='start'">
-                            <h3 class="text-dark mb-2">Seleccione una opcion</h3>
-                            <div class="row justify-content-center">
+
+                            <img src="../../../assets/img/logo.png" alt="" class="shadow mb-1" width="150px" style="border-radius: 5px 5px;border:10px solid white;">
+                            <h3 style="color: green;">Laboratorio Clinico Rodriguez</h3>
+
+                            <!-- <h3 class="text-dark mb-4">Seleccione una opcion</h3> -->
+                            <div class="row justify-content-center pt-5">
                                 <div class="col-lg-6 col-md-6 col-sm-10" (click)="action='services'">
-                                    <img src="../../../assets/img/ticket.png" alt="" class="shadow mb-2" width="150px" style="border-radius: 5px 5px;border:5px solid white;">
-                                    <h4>Obtener turno</h4>
+                                    <div class="container bg-white shadow p-2 rounded">
+                                        <img src="../../../assets/img/ticket.png" alt="" class="mb-2" width="150px" style="border-radius: 5px 5px;border:5px solid white;">
+                                        <h4>Obtener turno</h4>
+                                    </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-10" (click)="action='consult'">
-                                    <img src="../../../assets/img/consult.png" alt="" class="shadow mb-2" width="150px" style="border-radius: 5px 5px;border:5px solid white;">
-                                    <h4>Consultar resultados</h4>
+                                    <div class="container bg-white shadow p-2 rounded">
+                                        <img src="../../../assets/img/consult.png" alt="" class="mb-2" width="150px" style="border-radius: 5px 5px;border:5px solid white;">
+                                        <h4>Consultar resultados</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div *ngIf="action=='services'">
-                            <div class="row">
-                                <div class="col-6">
-                                    <button class="btn btn-lg btn-secondary mb-2" (click)="action='start'">Ir al inicio</button>
-                                    <h3 class="text-dark mb-4">Seleccione un servicio</h3>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <h3 class="text-success mb-4">Seleccione un servicio</h3>
                                 </div>
-                                <div class="col-6">
-                                    <img src="../../../assets/img/swipe-up.gif" alt="" class="shadow mb-4" width="100px" style="border-radius: 5px 5px;">
+                                <div class="col-0 text-start">
+                                    <button class="btn btn-lg btn-secondary mb-2" (click)="action='start'">Volver al inicio</button>
                                 </div>
                             </div>
-                            <div [class]=" 'alert shadow text-center alert-'+service.color " *ngFor="let service of listServices " role="alert " style="cursor: pointer;border-left:3px solid green;border: 3px solid green;" (click)="serviceName=service.name;code=service.code;save() ">
-                                <h3>{{ service.name }}</h3>
+                            <hr>
+
+                            <!-- <img src="../../../assets/img/swipe-up.gif" alt="" class="shadow mb-4" width="100px" style="border-radius: 5px 5px;"> -->
+
+                            <div class="row">
+                                <div [class]="'col-4 alert shadow text-center bg-white alert-'+service.color " *ngFor="let service of listServices " role="alert " style="cursor: pointer;border-left:3px solid green;" (click)="serviceName=service.name;code=service.code;save() ">
+                                    <h3>{{ service.name }}</h3>
+                                </div>
                             </div>
                             <div class="alert " *ngIf="listServices.length<=0 ">
                                 <h4 class="text-secondary ">Sin servicios</h4>
@@ -42,8 +54,17 @@
                         </div>
 
                         <div *ngIf="action=='consult'">
-                            <button class="btn btn-lg btn-secondary mb-2" (click)="action='start'">Ir al inicio</button>
-                            <h3 class="text-dark mb-4">Scane el codigo QR para ver sus resultados</h3>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <h3 class="text-success mb-4">Scanear codigo QR para ver sus resultados</h3>
+                                </div>
+                                <div class="col-0 text-start">
+                                    <button class="btn btn-lg btn-secondary mb-2" (click)="action='start'">Volver al inicio</button>
+                                </div>
+                            </div>
+                            <hr>
+
                             <img src="../../../assets/img/qr.png" alt="" class="shadow mb-4" width="300px" style="border-radius: 5px 5px;">
                         </div>
 
