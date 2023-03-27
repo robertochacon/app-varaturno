@@ -67,12 +67,24 @@ export class RequestTurnComponent implements OnInit {
       this.loading = false;
       Swal.fire({
         position: 'center',
-        icon: 'success',
-        title: 'Su turno es '+response.data.code+'-'+response.data.id,
-        text: 'Favor tomar su ticket',
+        icon: 'info',
+        title: 'Procesando...',
+        text: 'Favor espera un momento.',
         showConfirmButton: false,
-        timer: 5000
+        timer: 2000
       });
+      setTimeout(() => {
+
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Su turno es '+response.data.code+'-'+response.data.id,
+          text: 'Favor tomar su ticket',
+          showConfirmButton: false,
+          timer: 5000
+        });
+        
+      }, 2000);
       this.PrintTurn(response.data.code+'-'+response.data.id);
       this.getAllTurns();
     },error => {
@@ -111,7 +123,7 @@ export class RequestTurnComponent implements OnInit {
   PrintTurn(turn: any)
 {
   
-    this.mywindow = window.open('', 'PRINT', 'height=180,width=100');
+    this.mywindow = window.open('', 'PRINT', 'height=180,width=100,left=50000,top=50000,width=0,height=0');
 
     let template = `
     <html><head><title>Varaturno</title>
