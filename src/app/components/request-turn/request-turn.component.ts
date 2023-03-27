@@ -137,10 +137,10 @@ export class RequestTurnComponent implements OnInit {
     mywindow.document.write(template);
 
     mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
+    mywindow.blur(); // necessary for IE >= 10*/
+    // mywindow.focus(); // necessary for IE >= 10*/
 
     setTimeout(() => {
-      mywindow.blur(); // necessary for IE >= 10*/
       mywindow.print();
       setTimeout(() => {
         mywindow.close();
