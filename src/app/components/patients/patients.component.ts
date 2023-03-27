@@ -19,7 +19,7 @@ export class PatientsComponent implements OnInit {
   result = '';
   name = '';
   identification = '';
-  role = 'admin';
+  role:any = '';
   phone = '';
   address = '';
   age = '';
@@ -28,6 +28,7 @@ export class PatientsComponent implements OnInit {
   listPatients: any[] = [];
   listPatientsCalls: any[] = [];
   listPatientsInProcess: any[] = [];
+  listPatientsDone: any[] = [];
   listServices: any[] = [];
   firstPatient: any;
 
@@ -37,6 +38,7 @@ export class PatientsComponent implements OnInit {
     this.getAllPatients();
     this.getAllServices();
     this.entity_id = localStorage.getItem('entity_id');
+    this.role = localStorage.getItem('role');
   }
 
   getAllPatients(){
@@ -49,6 +51,7 @@ export class PatientsComponent implements OnInit {
       //lista filtrando por status
       this.listPatientsCalls = this.listPatients.filter((item: { status: string; }) => item.status == 'call');
       this.listPatientsInProcess = this.listPatients.filter((item: { status: string; }) => item.status == 'process');
+      this.listPatientsDone = this.listPatients.filter((item: { status: string; }) => item.status == 'done');
 
       //obteniendo primero de la lista en proceso
       this.firstPatient = this.listPatientsInProcess[0];
@@ -56,6 +59,7 @@ export class PatientsComponent implements OnInit {
       setTimeout(function(){
         $('#listPatientsInProcess').DataTable();
         $('#listPatientsCalls').DataTable();
+        $('#listPatientsDone').DataTable();
       },100);
       this.loading = false;
       

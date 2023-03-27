@@ -10,7 +10,7 @@
                     <h3>Gestionar turnos</h3>
                 </div>
                 <div class="col-lg-0 text-start">
-                    <button class="btn btn-success mt-1 mr-2" [disabled]="listTurns.length===0" (click)="setNextTurn('call')"><span class="d-none d-lg-block d-md-block"> Llamar siguiente paciente</span></button>
+                    <button class="btn btn-success mt-1 mr-2" [disabled]="listTurns.length===0" (click)="setNextTurn('call')"><span class="d-none d-lg-block d-md-block"> Llamar siguiente turno</span></button>
                     <button class="btn btn-primary mt-1" routerLink="/patients"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></button>
                 </div>
             </div>
@@ -18,110 +18,59 @@
 
             <hr>
             <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-12">
-                    <div class="container p-3 shadow rounded" style="background-color:#050a30;">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h5 class="text-info mb-2">Turnos en espera</h5>
 
-                        <h3 class="text-white mb-1">Nuevo turno</h3>
-                        <h5 class="text-secondary mb-4">Seleccione un servicio</h5>
-
-                        <div [class]="'alert shadow text-center alert-'+service.color" *ngFor="let service of listServices" role="alert" style="cursor: pointer;" (click)="serviceName=service.name;code=service.code;save()">
-                            <h3>{{ service.name }}</h3>
-                        </div>
-
-                        <div class="alert" *ngIf="listServices.length<=0">
-                            <h4 class="text-secondary">Sin servicios</h4>
-                        </div>
-
+                    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                        <table class="table table-hover table-striped responsive bg-info text-white" id="listTurnsInProcess" style="width:100%">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Turno</th>
+                                    <th>Puesto</th>
+                                    <th>Hora</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let turn of listTurnsInProcess" class="text-start">
+                                    <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
+                                    <td>{{turn.window}}</td>
+                                    <td>{{turn.created_at | date:'shortTime'}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">Opciones</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-12">
-                    <div class="container p-3 shadow rounded">
-                        <h5 class="text-dark mb-2">Lista de turnos</h5>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h5 class="text-success mb-2">Turnos en pantalla</h5>
 
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">En espera</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Llamados</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Atentidos</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active pt-3" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-                                    <table class="table table-hover table-striped responsive" id="listTurnsInProcess" style="width:100%">
-                                        <thead class="table-info">
-                                            <tr>
-                                                <th>Turno</th>
-                                                <th>Puesto</th>
-                                                <th>Hora</th>
-                                                <th>Accion</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let turn of listTurnsInProcess" class="text-start">
-                                                <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
-                                                <td>{{turn.window}}</td>
-                                                <td>{{turn.created_at | date:'shortTime'}}</td>
-                                                <td>
-                                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">Opciones</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade pt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-                                    <table class="table table-hover table-striped responsive" id="listTurnsCalls" style="width:100%">
-                                        <thead class="table-success">
-                                            <tr>
-                                                <th>Turno</th>
-                                                <th>Puesto</th>
-                                                <th>Hora</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let turn of listTurnsCalls" class="text-start">
-                                                <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
-                                                <td>{{turn.window}}</td>
-                                                <td>{{turn.created_at | date:'shortTime'}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade pt-3" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
-                                    <table class="table table-hover table-striped responsive" id="listTurnsDone" style="width:100%">
-                                        <thead class="table-dark">
-                                            <tr>
-                                                <th>Turno</th>
-                                                <th>Puesto</th>
-                                                <th>Hora</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let turn of listTurnsDone" class="text-start">
-                                                <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
-                                                <td>{{turn.window}}</td>
-                                                <td>{{turn.created_at | date:'shortTime'}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="alert" *ngIf="listTurns.length<=0">
-                            <h5 class="text-secondary">Sin turnos</h5>
-                        </div>
-
+                    <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
+                        <table class="table table-hover table-striped responsive bg-success" id="listTurnsCalls" style="width:100%">
+                            <thead class="table-success">
+                                <tr>
+                                    <th>Turno</th>
+                                    <th>Puesto</th>
+                                    <th>Hora</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let turn of listTurnsCalls" class="text-start text-white">
+                                    <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
+                                    <td>{{turn.window}}</td>
+                                    <td>{{turn.created_at | date:'shortTime'}}</td>
+                                    <td>
+                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">Opciones</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
