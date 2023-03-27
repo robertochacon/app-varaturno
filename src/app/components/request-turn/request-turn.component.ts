@@ -123,7 +123,7 @@ export class RequestTurnComponent implements OnInit {
   PrintTurn(turn: any)
 {
   
-    this.mywindow = window.open('', 'PRINT', 'left=50000,top=50000,width=0,height=0');
+    this.mywindow = window.open('', 'PRINT', 'left=0,top=0,width=0,height=0');
 
     let template = `
     <html><head><title>Varaturno</title>
