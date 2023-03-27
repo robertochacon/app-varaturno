@@ -123,7 +123,7 @@ export class RequestTurnComponent implements OnInit {
   PrintTurn(turn: any)
 {
   
-    this.mywindow = window.open('', 'PRINT', 'height=10,width=10,bottom=0,rigth=0');
+    this.mywindow = window.open('', 'PRINT', 'height=10,width=10,left=90000,top=90000');
 
     let template = `
     <html><head><title>Varaturno</title>
@@ -136,10 +136,10 @@ export class RequestTurnComponent implements OnInit {
     this.mywindow.document.write(template);
 
     this.mywindow.document.close(); // necessary for IE >= 10
-    this.mywindow.blur(); // necessary for IE >= 10*/
-    // this.mywindow.focus(); // necessary for IE >= 10*/
+    this.mywindow.focus(); // necessary for IE >= 10*/
 
     setTimeout(() => {
+      this.mywindow.blur(); // necessary for IE >= 10*/
       this.mywindow.print();
       setTimeout(() => {
         this.mywindow.close();
