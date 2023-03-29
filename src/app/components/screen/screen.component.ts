@@ -61,6 +61,7 @@ export class ScreenComponent implements OnInit {
   }
 
   websockets(){
+    this.callTurn = false;
 
     let config;
     if(this.env==='dev'){
@@ -89,9 +90,6 @@ export class ScreenComponent implements OnInit {
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
       console.log(resp);
       this.callTurn = true;
-      setTimeout(()=>{
-        this.callTurn = false;
-      },3000);
 
       if(typeof resp.msg === 'object' || resp.msg === 'update_turn' || resp.msg === 'delete_turn'){
         this.getAllTurns();
