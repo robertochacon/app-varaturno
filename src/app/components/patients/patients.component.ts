@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { ServicesService } from 'src/app/services/services.service';
 import { PatientsService } from 'src/app/services/patients.service';
 import Swal from 'sweetalert2'
+import Echo from 'laravel-echo';
 declare const $: any;
 
 
@@ -31,12 +32,14 @@ export class PatientsComponent implements OnInit {
   listPatientsDone: any[] = [];
   listServices: any[] = [];
   firstPatient: any;
+  env: any = 'prod';
 
   constructor(private _patient: PatientsService, private _services: ServicesService) { }
 
   ngOnInit(): void {
     this.getAllPatients();
     this.getAllServices();
+    this.websockets();
     this.entity_id = localStorage.getItem('entity_id');
     this.role = localStorage.getItem('role');
   }
@@ -67,6 +70,40 @@ export class PatientsComponent implements OnInit {
         this.loadData = false;
         this.loading = false;
     })
+
+  }
+
+  websockets(){
+
+    let config;
+    if(this.env==='dev'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: window.location.hostname,
+        forceTLS: false,
+        wsPort: 6001,
+        enabledTransports: ['ws']
+      }
+    }else if(this.env==='prod'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: '161.22.44.200',
+        forceTLS: false,
+        enabledTransports: ['ws']
+      }
+    }
+
+    const echo = new Echo(config);
+
+    echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
+      if (resp.msg === 'register_patient') {
+        this.getAllPatients();
+      }
+    });
 
   }
 

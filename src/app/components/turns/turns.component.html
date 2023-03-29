@@ -44,6 +44,13 @@
                         </table>
                     </div>
 
+                    <div class="pt-5 text-center" *ngIf="loading">
+                        <h3>Cargando</h3>
+                        <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <h5 class="text-success mb-2">Turnos en pantalla</h5>
@@ -59,7 +66,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let turn of listTurnsCalls" class="text-start text-white">
+                                <tr *ngFor="let turn of listTurnsCalls" class="text-start">
                                     <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
                                     <td>{{turn.window}}</td>
                                     <td>{{turn.created_at | date:'shortTime'}}</td>
@@ -69,6 +76,13 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <div class="pt-5 text-center" *ngIf="loading">
+                        <h3>Cargando</h3>
+                        <div class="spinner-border pt-2" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
 
                 </div>

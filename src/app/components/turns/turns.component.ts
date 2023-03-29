@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { ServicesService } from 'src/app/services/services.service';
 import { TurnsService } from 'src/app/services/turns.service';
 import Swal from 'sweetalert2'
+import Echo from 'laravel-echo';
 declare const $: any;
 
 @Component({
@@ -29,12 +30,14 @@ export class TurnsComponent implements OnInit {
   listTurnsCalls: any[] = [];
   listTurnsInProcess: any[] = [];
   listTurnsDone: any[] = [];
+  env: any = 'prod';
 
   constructor(private _services: ServicesService, private _turns: TurnsService, private _router: Router) { }
 
   ngOnInit(): void {
     this.getAllServices();
     this.getAllTurns();
+    this.websockets();
     this.user_id = localStorage.getItem('user_id');
     this.entity_id = localStorage.getItem('entity_id');
     this.windows = localStorage.getItem('aw');
@@ -122,6 +125,41 @@ export class TurnsComponent implements OnInit {
     })
 
   }
+
+  websockets(){
+
+    let config;
+    if(this.env==='dev'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: window.location.hostname,
+        forceTLS: false,
+        wsPort: 6001,
+        enabledTransports: ['ws']
+      }
+    }else if(this.env==='prod'){
+      config = {
+        broadcaster: 'pusher',
+        cluster: 'mt1',
+        key: 'RCA090698',
+        wsHost: '161.22.44.200',
+        forceTLS: false,
+        enabledTransports: ['ws']
+      }
+    }
+
+    const echo = new Echo(config);
+
+    echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
+      if (resp.msg === 'register_turn') {
+        this.getAllTurns();
+      }
+    });
+
+  }
+
 
   setStatusTurn(text:string, status:string): void {
 

@@ -88,15 +88,15 @@ export class ScreenComponent implements OnInit {
 
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
       console.log(resp);
-      this.getAllTurns();
-      this.getAllPatients();
+      this.callTurn = true;
+      setTimeout(()=>{
+        this.callTurn = false;
+      },3000);
+
       if(typeof resp.msg === 'object'){
-        this.callTurn = true;
-        setTimeout(()=>{
-          this.callTurn = false;
-        },3000);
-        console.log('yes is object')
-        // this.voice(resp.msg)
+        this.getAllTurns();
+      }else if (resp.msg === 'register_patient' || resp.msg === 'update_patient' || resp.msg === 'delete_patient') {
+        this.getAllPatients();
       }
     });
 
