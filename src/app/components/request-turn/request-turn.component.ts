@@ -84,9 +84,15 @@ export class RequestTurnComponent implements OnInit {
           timer: 5000
         });
         
+        setTimeout(() => {
+          this.action = 'start';
+        }, 1000);
+        
       }, 2000);
+
       this.PrintTurn(response.data.code+'-'+response.data.id);
       this.getAllTurns();
+
     },error => {
       Swal.fire({
         position: 'center',
