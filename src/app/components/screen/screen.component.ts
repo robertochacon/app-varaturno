@@ -93,7 +93,7 @@ export class ScreenComponent implements OnInit {
         this.callTurn = false;
       },3000);
 
-      if(typeof resp.msg === 'object'){
+      if(typeof resp.msg === 'object' || resp.msg === 'update_turn' || resp.msg === 'delete_turn'){
         this.getAllTurns();
       }else if (resp.msg === 'register_patient' || resp.msg === 'update_patient' || resp.msg === 'delete_patient') {
         this.getAllPatients();
