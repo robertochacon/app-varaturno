@@ -15,7 +15,6 @@ export class ScreenComponent implements OnInit {
   loadData = false;
   listTurns: any[] = [];
   listPatients: any[] = [];
-  callTurn: any = false;
   env:any = 'prod';
 
   constructor(private _services: ServicesService, private _turns: TurnsService, private _patient: PatientsService) { }
@@ -61,7 +60,6 @@ export class ScreenComponent implements OnInit {
   }
 
   websockets(){
-    this.callTurn = false;
 
     let config;
     if(this.env==='dev'){
@@ -88,12 +86,13 @@ export class ScreenComponent implements OnInit {
     const echo = new Echo(config);
 
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
-      console.log(resp);
-      this.callTurn = true;
-
+      const audio = new Audio('../../../assets/song/turno.mp3');
+      
       if(typeof resp.msg === 'object' || resp.msg === 'update_turn' || resp.msg === 'delete_turn'){
+        audio.play();
         this.getAllTurns();
       }else if (resp.msg === 'register_patient' || resp.msg === 'update_patient' || resp.msg === 'delete_patient') {
+        audio.play();
         this.getAllPatients();
       }
     });
