@@ -90,7 +90,7 @@ export class RequestTurnComponent implements OnInit {
         
       }, 2000);
 
-      this.PrintTurn(response.data.code+'-'+response.data.id);
+      this.PrintTurn('TN-'+response.data.id);
       this.getAllTurns();
 
     },error => {
