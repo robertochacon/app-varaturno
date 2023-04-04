@@ -1,7 +1,7 @@
 <div class="row justify-content-center without-borders d-none d-lg-flex d-md-flex align-items-center fondo" style="height: 100vh;">
 
     <div class="col-lg-10 col-md-10 col-sm-10">
-        <div class="container pt-3 text-center shadow rounded" style="background-color: white;overflow-y: scroll;height: 90vh;">
+        <div class="container pt-3 text-center shadow rounded" style="background-color: white;height: 90vh;">
             <!-- <div class="container pt-3 text-center shadow rounded" style="background-color: rgba(255, 255, 255, 0.8);overflow-y: scroll;height: 90vh;"> -->
 
             <div class="row justify-content-center">
@@ -10,21 +10,25 @@
 
                         <div *ngIf="action=='start'">
 
-                            <img src="../../../assets/img/logo.png" alt="" class="mb-1" width="150px" style="border-radius: 5px 5px;border:10px solid white;">
+                            <img src="../../../assets/img/logo.png" alt="" class="mb-1" width="100px" style="border-radius: 5px 5px;border:10px solid white;">
                             <h3 style="color: green;">Laboratorio Clinico Rodriguez</h3>
 
                             <!-- <h3 class="text-dark mb-4">Seleccione una opcion</h3> -->
-                            <div class="row justify-content-center pt-5">
-                                <div class="col-lg-6 col-md-6 col-sm-10" (click)="action='services'">
-                                    <div class="container bg-light shadow p-2 rounded" style="border-left:5px solid green;">
-                                        <img src="../../../assets/img/ticket.png" alt="" class="mb-2" width="150px">
-                                        <h4 class="text-dark">Obtener turno</h4>
+                            <div class="row justify-content-center pt-2">
+                                <div class="col-lg-10 col-md-10 col-sm-10" (click)="save()">
+                                    <div class="container bg-dark shadow p-2 rounded" style="border-left:5px solid green;border-right:5px solid green;">
+                                        <div class="d-flex justify-content-around align-items-center">
+                                            <img src="../../../assets/img/ticket.png" alt="" class="mb-2" width="150px">
+                                            <h1 class="text-white">Obtener turno</h1>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-10" (click)="action='consult'">
-                                    <div class="container bg-light shadow p-2 rounded" style="border-left:5px solid green;">
-                                        <img src="../../../assets/img/consult.png" alt="" class="mb-2" width="150px" style="border-radius: 5px 5px;border:5px solid white;">
-                                        <h4 class="text-dark">Consultar resultados</h4>
+                                <div class="col-lg-10 col-md-10 col-sm-10 mt-4" (click)="action='consult'">
+                                    <div class="container bg-dark shadow p-2 rounded" style="border-left:5px solid green;border-right:5px solid green;">
+                                        <div class="d-flex justify-content-around align-items-center">
+                                            <img src="../../../assets/img/consult.png" alt="" class="mb-2" width="150px">
+                                            <h1 class="text-white">Consultar resultados</h1>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -61,7 +61,7 @@ export class RequestTurnComponent implements OnInit {
     let datos = new FormData();
     datos.append("user_id",this.user_id);
     datos.append("entity_id",this.entity_id);
-    datos.append("service",this.serviceName);
+    // datos.append("service",this.serviceName);
     datos.append("code",this.code);
     this._turns.setTurns(datos).subscribe((response)=>{
       this.loading = false;
@@ -78,7 +78,7 @@ export class RequestTurnComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Su turno es '+response.data.code+'-'+response.data.id,
+          title: 'Su numero de turno es: TN-'+response.data.id,
           text: 'Favor tomar su ticket',
           showConfirmButton: false,
           timer: 5000
