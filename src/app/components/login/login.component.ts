@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
       
         setTimeout(() => {
           this.loading = false;
-          if(response.user.role == 'delivery'){
-            this.router.navigate(["/messengers-shipments"]);
+          if(response.user.role == 'user'){
+            this.router.navigate(["/patients"]);
           }else{
             this.router.navigate(["/dashboard"]);
           }

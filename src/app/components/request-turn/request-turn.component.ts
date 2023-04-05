@@ -29,7 +29,7 @@ export class RequestTurnComponent implements OnInit {
   constructor(private _services: ServicesService, private _turns: TurnsService) { }
 
   ngOnInit(): void {
-    this.getAllServices();
+    // this.getAllServices();
     this.user_id = localStorage.getItem('user_id');
     this.entity_id = localStorage.getItem('entity_id');
     this.windows = localStorage.getItem('aw');

@@ -35,7 +35,7 @@ export class TurnsComponent implements OnInit {
   constructor(private _services: ServicesService, private _turns: TurnsService, private _router: Router) { }
 
   ngOnInit(): void {
-    this.getAllServices();
+    // this.getAllServices();
     this.getAllTurns();
     this.websockets();
     this.user_id = localStorage.getItem('user_id');
