@@ -33,11 +33,11 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let turn of listTurnsInProcess" class="text-start">
-                                    <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
+                                    <td><b>TN-0{{ turn.id }}</b></td>
                                     <td>{{turn.window}}</td>
                                     <td>{{turn.created_at | date:'shortTime'}}</td>
                                     <td>
-                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">Opciones</button>
+                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName='TN-0'+turn.id" style="cursor: pointer;">Opciones</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -67,11 +67,11 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let turn of listTurnsCalls" class="text-start">
-                                    <td><b>{{ turn.code }}-0{{ turn.id }}</b></td>
+                                    <td><b>TN-0{{ turn.id }}</b></td>
                                     <td>{{turn.window}}</td>
                                     <td>{{turn.created_at | date:'shortTime'}}</td>
                                     <td>
-                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName=turn.code+'-0'+turn.id" style="cursor: pointer;">Opciones</button>
+                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#wathTurn" (click)="selectTurn=turn.id;turnName='TN-0'+turn.id" style="cursor: pointer;">Opciones</button>
                                     </td>
                                 </tr>
                             </tbody>

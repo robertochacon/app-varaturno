@@ -38,7 +38,7 @@
                         <div *ngIf="turn.status=='call' && i<6" [class]="'alert shadow bg-primary'" role="alert">
                             <div class="row">
                                 <div class="col-4 text-center">
-                                    <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
+                                    <h4 class="text-white"><b>Turno:</b><br>TN-0{{ turn.id }}</h4>
                                 </div>
                                 <div class="col-4 text-center">
                                     <h4 class="text-white" *ngIf="turn.window=='1'"><b>Puesto:</b><br>Facturacion {{ turn.window }}</h4>
@@ -75,7 +75,7 @@
                 <div *ngIf="turn.status=='call' && i<6" [class]="'alert shadow bg-primary'" role="alert">
                     <div class="row">
                         <div class="col-4 text-center">
-                            <h4 class="text-white"><b>Turno:</b><br>{{ turn.code }}-0{{ turn.id }}</h4>
+                            <h4 class="text-white"><b>Turno:</b><br>TN-0{{ turn.id }}</h4>
                         </div>
                         <div class="col-4 text-center">
                             <h4 class="text-white" *ngIf="turn.window=='1'"><b>Puesto:</b><br>Facturacion {{ turn.window }}</h4>
