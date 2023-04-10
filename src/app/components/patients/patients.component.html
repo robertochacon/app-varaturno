@@ -17,13 +17,13 @@
 
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-process" type="button" role="tab" aria-controls="nav-process" aria-selected="true">Pacientes en espera</button>
-                    <button class="nav-link" id="nav-calls-tab" data-bs-toggle="tab" data-bs-target="#nav-calls" type="button" role="tab" aria-controls="nav-calls" aria-selected="false">Pacientes en pantalla</button>
+                    <button [class]="role!=='user'?'nav-link active':'nav-link'" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-process" type="button" role="tab" aria-controls="nav-process" aria-selected="true">Pacientes en espera</button>
+                    <button [class]="role==='user'?'nav-link active':'nav-link'" id="nav-calls-tab" data-bs-toggle="tab" data-bs-target="#nav-calls" type="button" role="tab" aria-controls="nav-calls" aria-selected="false">Pacientes en pantalla</button>
                     <button class="nav-link" id="nav-done-tab" data-bs-toggle="tab" data-bs-target="#nav-done" type="button" role="tab" aria-controls="nav-done" aria-selected="false">Pacientes atendidos</button>
                 </div>
             </nav>
             <div class="tab-content pt-3" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">
+                <div [class]="role!=='user'?'tab-pane fade show active':'tab-pane fade'" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">
                     <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
                         <table class="table table-hover table-striped responsive" id="listPatientsInProcess" style="width:100%">
                             <thead class="table-info">
@@ -56,7 +56,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="nav-calls" role="tabpanel" aria-labelledby="nav-calls-tab">
+                <div [class]="role==='user'?'tab-pane fade show active':'tab-pane fade'" id="nav-calls" role="tabpanel" aria-labelledby="nav-calls-tab">
                     <div *ngIf="!loading" class="bg-light p-3 border shadow table-responsive">
                         <table class="table table-hover table-striped responsive" id="listPatientsCalls" style="width:100%">
                             <thead class="table-success">
@@ -82,7 +82,8 @@
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
                                     <td>
                                         <button *ngIf="role=='admin'" class="btn btn-secondary mr-2" (click)="setStatusTurnId(patient.id, 'process')">Cola</button>
-                                        <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'done')">Atender</button>
+                                        <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="patientjson=patient" data-bs-toggle="modal" data-bs-target="#ModalPatient">Atender</button>
+                                        <!-- <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'done')" data-bs-toggle="modal" data-bs-target="#ModalPatient">Atender</button> -->
                                         <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>
@@ -185,6 +186,36 @@
     </div>
 </div>
 
+
+<!-- Modal of patient -->
+<div *ngIf="patientjson != []" class="modal fade" id="ModalPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-dark" id="exampleModalLabel"><b>Paciente en atención</b></h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <b for="">Identificacion:</b>
+                <p>{{ patientjson.identification }}</p>
+                <b for="">Nombre:</b>
+                <p>{{ patientjson.name }}</p>
+                <b for="">Edad:</b>
+                <p>{{ patientjson.age }}</p>
+                <b for="">Servicio:</b>
+                <p>{{ patientjson.service }}</p>
+                <b for="">Fecha:</b>
+                <p>{{patientjson.created_at | date:'dd/MM/yyyy'}}</p>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-success" data-bs-dismiss="modal" (click)="PrintTurn(patientjson)">Completar</button>
+                <button type="button " class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
     <div>

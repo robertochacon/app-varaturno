@@ -126,14 +126,13 @@ export class RequestTurnComponent implements OnInit {
 
   }
 
-  PrintTurn(turn: any)
-{
+  PrintTurn(turn: any){
     var mywindow: any;
   
     mywindow = window.open('', 'PRINT', 'height=10,width=10');
 
     let template = `
-    <html><head><title>Varaturno</title>
+    <html><head><title>LCR</title>
     </head><body>
     <center><h1>TURNO<br>${turn}</h1></center>
     <center><img src="../../../assets/img/qr.png" class="shadow mb-4" width="110px" style="margin-top:-20px;border-radius: 5px 5px;"></center>
@@ -154,6 +153,6 @@ export class RequestTurnComponent implements OnInit {
     }, 300);
 
     return true;
-}
+  }
 
 }

@@ -26,6 +26,7 @@ export class PatientsComponent implements OnInit {
   age = '';
   service = 'null';
   entity_id:any = '';
+  patientjson:any = [];
   listPatients: any[] = [];
   listPatientsCalls: any[] = [];
   listPatientsInProcess: any[] = [];
@@ -245,6 +246,41 @@ export class PatientsComponent implements OnInit {
       });
     })
 
+  }
+
+  PrintTurn(patient: any){
+    var mywindow: any;
+  
+    mywindow = window.open('', 'PRINT', 'height=10,width=10');
+    let template = '';
+
+    if(patient){
+      template = `
+      <html><head><title>LCR</title>
+      </head><body>
+      <center><img src="../../../assets/img/logo.png" width="70px"></center>
+      <p style="margin-top:-1px;"><b>Identificación: </b>${patient.identification}</p>
+      <p style="margin-top:-20px;"><b>Nombre: </b>${patient.name}</p>
+      <p style="margin-top:-20px;"><b>Edad: </b>${patient.age}</p>
+      <p style="margin-top:-20px;"><b>Servicio: </b>${patient.service}</p>
+      </body></html>
+      `;
+    }
+
+    mywindow.document.write(template);
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.blur(); // necessary for IE >= 10*/
+    // mywindow.focus(); // necessary for IE >= 10*/
+
+    setTimeout(() => {
+      mywindow.print();
+      setTimeout(() => {
+        mywindow.close();
+      }, 300);
+    }, 300);
+
+    return true;
   }
 
 }
