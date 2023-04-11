@@ -82,7 +82,7 @@
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
                                     <td>
                                         <button *ngIf="role=='admin'" class="btn btn-secondary mr-2" (click)="setStatusTurnId(patient.id, 'process')">Cola</button>
-                                        <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="patientjson=patient" data-bs-toggle="modal" data-bs-target="#ModalPatient">Atender</button>
+                                        <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="patientjson=patient;setStatusTurnId(patient.id, 'done')" data-bs-toggle="modal" data-bs-target="#ModalPatient">Atender</button>
                                         <!-- <button *ngIf="role=='user'" class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'done')" data-bs-toggle="modal" data-bs-target="#ModalPatient">Atender</button> -->
                                         <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
                                     </td>
@@ -103,6 +103,7 @@
                                     <th>Telefono</th>
                                     <th>Servicio</th>
                                     <th>Fecha</th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,6 +115,9 @@
                                     <td>{{patient.phone}}</td>
                                     <td>{{patient.service}}</td>
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-secondary" (click)="PrintTurn(patientjson)">Imprimir</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -191,22 +195,44 @@
 <div *ngIf="patientjson != []" class="modal fade" id="ModalPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-dark" id="exampleModalLabel"><b>Paciente en atención</b></h3>
+            <div class="modal-header bg-success">
+                <h3 class="modal-title text-white" id="exampleModalLabel"><b>Paciente en atención</b></h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <b for="">Identificacion:</b>
-                <p>{{ patientjson.identification }}</p>
-                <b for="">Nombre:</b>
-                <p>{{ patientjson.name }}</p>
-                <b for="">Edad:</b>
-                <p>{{ patientjson.age }}</p>
-                <b for="">Servicio:</b>
-                <p>{{ patientjson.service }}</p>
-                <b for="">Fecha:</b>
-                <p>{{patientjson.created_at | date:'dd/MM/yyyy'}}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Identificacion:</b>
+                            <p>{{ patientjson.identification }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Nombre:</b>
+                            <p>{{ patientjson.name }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Edad:</b>
+                            <p>{{ patientjson.age }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Servicio:</b>
+                            <p>{{ patientjson.service }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Fecha:</b>
+                            <p>{{patientjson.created_at | date:'dd/MM/yyyy'}}</p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="modal-footer ">
