@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           if(response.user.role == 'user'){
             this.router.navigate(["/patients"]);
           }else{
-            this.router.navigate(["/dashboard"]);
+            this.router.navigate(["/turns"]);
           }
         }, 2000);
 
