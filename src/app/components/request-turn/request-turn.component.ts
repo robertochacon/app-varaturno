@@ -59,10 +59,10 @@ export class RequestTurnComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("user_id",this.user_id);
-    datos.append("entity_id",this.entity_id);
+    datos.append("user_id",'1');
+    datos.append("entity_id",'1');
     // datos.append("service",this.serviceName);
-    datos.append("code",this.code);
+    datos.append("code","");
     this._turns.setTurns(datos).subscribe((response)=>{
       this.loading = false;
       Swal.fire({
