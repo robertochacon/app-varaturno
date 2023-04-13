@@ -111,9 +111,9 @@ export class TurnsComponent implements OnInit {
       this.listTurnsDone = this.listTurns.filter((item: { status: string; }) => item.status == 'done');
 
       this.firstTurnInProcess = this.listTurnsInProcess[0];
-      if(this.listTurnsInProcess.length<=5 && this.listTurnsInProcess.length>=1){
-        this.setNextTurn('call');
-      }
+      // if(this.firstTurnInProcess.length>=1 && this.listTurnsCalls.length<=5){
+      //   this.setNextTurn('call');
+      // }
 
       setTimeout(function(){
         $('#listTurnsInProcess').DataTable();

@@ -31,6 +31,7 @@ export class ScreenComponent implements OnInit {
     this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
+      this.listTurns = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
 
       setTimeout(function(){
         console.log(response.data);
