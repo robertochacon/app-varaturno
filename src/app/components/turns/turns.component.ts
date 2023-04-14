@@ -59,7 +59,7 @@ export class TurnsComponent implements OnInit {
       setTimeout(function(){
         $('#listTurnsInProcess').DataTable();
         $('#listTurnsCalls').DataTable();
-      },100);
+      },200);
       this.loading = false;
       
     }, error=>{

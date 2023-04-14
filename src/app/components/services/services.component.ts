@@ -41,7 +41,7 @@ export class ServicesComponent implements OnInit {
 
       setTimeout(function(){
         $('#listEntities').DataTable();
-      },100);
+      },200);
       this.loading = false;
       
     }, error=>{

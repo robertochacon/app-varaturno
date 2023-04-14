@@ -65,10 +65,8 @@ export class PatientsComponent implements OnInit {
       setTimeout(function(){
         $('#listPatientsInProcess').DataTable();
         $('#listPatientsCalls').DataTable();
-        $('#listPatientsDone').DataTable({
-          order: [[3, 'asc']],
-        });
-      },100);
+        $('#listPatientsDone').DataTable();
+      },200);
       this.loading = false;
       
     }, error=>{
@@ -177,7 +175,7 @@ export class PatientsComponent implements OnInit {
   
   delete(id: any): void {
     Swal.fire({
-      title: 'Deseas eliminar este usuario?',
+      title: 'Deseas eliminar este paciente?',
       // text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,

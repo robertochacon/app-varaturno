@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { EntitiesService } from 'src/app/services/entities.service';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2'
 declare const $: any;
@@ -24,11 +23,10 @@ export class UsersComponent implements OnInit {
   listUsers: any[] = [];
   listEntities: any[] = [];
 
-  constructor(private _users: UsersService, private _entities: EntitiesService) { }
+  constructor(private _users: UsersService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
-    this.getAllEntities();
   }
 
   getAllUsers(){
@@ -40,7 +38,7 @@ export class UsersComponent implements OnInit {
 
       setTimeout(function(){
         $('#listUsers').DataTable();
-      },100);
+      },200);
       this.loading = false;
       
     }, error=>{
@@ -54,15 +52,6 @@ export class UsersComponent implements OnInit {
     setTimeout(function(){
       $('#listUsers').DataTable();
     },100);
-  }
-
-  getAllEntities(){
-    this._entities.getAllEntities().subscribe((response)=>{
-      this.listEntities = response.data;
-      console.log(this.listEntities);
-    }, error=>{
-      // this.listMessengers = [];
-    })
   }
 
   reset(){
