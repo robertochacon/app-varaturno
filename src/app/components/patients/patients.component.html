@@ -190,6 +190,9 @@
     </div>
 </div>
 
+<button class="btn btn-danger" (click)="setStatusTurn('call_turn')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
+    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar paciente</b> 
+</button>
 
 <!-- Modal of patient -->
 <div *ngIf="patientjson != []" class="modal fade" id="ModalPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

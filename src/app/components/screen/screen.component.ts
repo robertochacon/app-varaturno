@@ -69,8 +69,7 @@ export class ScreenComponent implements OnInit {
   voiceTurn(msg:any){
 
     let synth = window.speechSynthesis
-    // let text = "Turno "+msg;
-    let text = "Siguiente turno";
+    let text = "Turno "+msg;
     let utterThis = new SpeechSynthesisUtterance(text)
     utterThis.lang = 'es-ES';
     synth.speak(utterThis)
