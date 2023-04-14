@@ -1,11 +1,12 @@
 <div class="row justify-content-center p-2 fondo d-flex align-items-center without-borders d-none d-lg-flex d-md-flex" style="height: 100vh;">
     <div class="col-11 d-flex align-items-center shadow" style="height: 90vh; background:rgba(255, 255, 255, 0.8);">
-        <div class="row p-2">
+
+        <div *ngIf="action=='turns'" class="row p-2">
             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
-                <img src="../../../assets/img/logo.png" alt="" width="100px" style="border-radius: 5px 5px;">
+                <img src="../../../assets/img/logo.png" alt="" width="100px" style="border-radius: 5px 5px;" (click)="action='notification'" style="cursor:pointer;">
             </div>
             <div class="col-lg-7 col-md-7 col-sm-12">
-                <div class="container p-3 rounded">
+                <div class="container p-3 rounded text-center">
                     <h1 class="text-dark text-center mb-2">Lista de pacientes</h1>
 
                     <div *ngFor="let patient of listPatients;let i = index">
@@ -31,7 +32,7 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-5 col-sm-12">
-                <div class="container p-3 rounded">
+                <div class="container p-3 rounded text-center">
                     <h1 class="text-dark text-center mb-2">Lista de turnos</h1>
 
                     <div *ngFor="let turn of listTurns;let i = index">
@@ -60,15 +61,47 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 text-center">
                 <hr>
-                <h4>Esta pantalla se actualiza cada 10 segundos, favor estar atentos a su llamado.</h4>
+                <h4>Favor de tener su ticket a mano y este atentos a su llamado.</h4>
             </div>
         </div>
+
+        <div *ngIf="action=='notification'" class="row p-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <img src="../../../assets/img/logo.png" alt="" width="100px" style="border-radius: 5px 5px;">
+                <h1 class="text-dark text-center mt-5 mb-3">¿Como quieres notificar al paciente?</h1>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="container p-3 rounded text-center">
+                    <h3 class="text-dark text-center mb-2">Utilizar voz</h3>
+
+                    <div class="alert alert-success" (click)="setNotification('voice')" style="cursor:pointer;">
+                        <h3 class="text-secondary">Activar</h3>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-12">
+                <div class="container p-3 rounded text-center">
+                    <h3 class="text-dark text-center mb-2">Utilizar sonido</h3>
+
+                    <div class="alert alert-success" (click)="setNotification('sound')" style="cursor:pointer;">
+                        <h3 class="text-secondary">Activar</h3>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                <hr>
+                <h5>Seleccione la opcion para notificar al paciente que ya puede ser atendido</h5>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <div class="mt-3 fondo d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none " style="height:100vh;">
     <div>
-        <div class="container rounded" style="height: 90vh; background:rgba(255, 255, 255, 0.8);">
+        <div class="container rounded text-center" style="height: 90vh; background:rgba(255, 255, 255, 0.8);">
             <h1 class="text-dark text-center mb-2">Lista de turnos</h1>
 
             <div *ngFor="let turn of listTurns;let i = index">

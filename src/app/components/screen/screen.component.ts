@@ -15,6 +15,8 @@ export class ScreenComponent implements OnInit {
   loadData = false;
   listTurns: any[] = [];
   listPatients: any[] = [];
+  action:any = 'notification';
+  notification:any = '';
   env:any = 'prod';
 
   constructor(private _services: ServicesService, private _turns: TurnsService, private _patient: PatientsService) { }
@@ -23,6 +25,10 @@ export class ScreenComponent implements OnInit {
     this.getAllTurns();
     this.getAllPatients();
     this.websockets();
+    this.notification = localStorage.getItem('notification');
+    if(this.notification == 'sound' || this.notification == 'voice'){
+      this.action = 'turns';
+    }
   }
 
   getAllTurns(){
@@ -60,6 +66,39 @@ export class ScreenComponent implements OnInit {
 
   }
 
+  voiceTurn(msg:any){
+
+    let synth = window.speechSynthesis
+    // let text = "Turno "+msg;
+    let text = "Siguiente turno";
+    let utterThis = new SpeechSynthesisUtterance(text)
+    utterThis.lang = 'es-ES';
+    synth.speak(utterThis)
+
+    setTimeout(()=>{
+      let utterThis = new SpeechSynthesisUtterance('Favor pasar a facturar');
+      utterThis.lang = 'es-ES';
+      synth.speak(utterThis);
+    },1000);
+
+  }
+
+  voicePatient(msg:any){
+
+    let synth = window.speechSynthesis
+    let text = msg;
+    let utterThis = new SpeechSynthesisUtterance(text)
+    utterThis.lang = 'es-ES';
+    synth.speak(utterThis)
+
+    setTimeout(()=>{
+      let utterThis = new SpeechSynthesisUtterance('Favor pasar a toma de muestra');
+      utterThis.lang = 'es-ES';
+      synth.speak(utterThis);
+    },1000);
+
+  }
+
   websockets(){
 
     let config;
@@ -85,19 +124,34 @@ export class ScreenComponent implements OnInit {
     }
 
     const echo = new Echo(config);
-
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
-
       this.getAllTurns();
       this.getAllPatients();
       
+    if(this.notification == 'voice'){
+      if(resp.msg.action === 'call_turn'){
+        this.voiceTurn('0'+resp.msg.turn);
+      }else if(resp.msg.action === 'call_patient'){
+        this.voicePatient(resp.msg.patient);
+      }
+    }
+
+    if(this.notification == 'sound'){
       const audio = new Audio('../../../assets/song/turno.mp3');
-      if(resp.msg === 'update_turn' || resp.msg === 'update_patient'){
+      if(resp.msg === 'call_turn'){
+        audio.play();
+      }else if(resp.msg === 'call_patient'){
         audio.play();
       }
+    }
     
     });
 
+  }
+
+  setNotification(value:any){
+    localStorage.setItem('notification',value);
+    this.action = 'turns';
   }
 
   // voice(msg:any){
