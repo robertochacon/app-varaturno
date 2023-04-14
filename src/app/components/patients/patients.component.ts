@@ -33,7 +33,7 @@ export class PatientsComponent implements OnInit {
   listPatientsDone: any[] = [];
   listServices: any[] = [];
   firstPatient: any;
-  firstPatientInScreen: any;
+  firstPatientCall: any;
   env: any = 'prod';
 
   constructor(private _patient: PatientsService, private _services: ServicesService) { }
@@ -59,7 +59,7 @@ export class PatientsComponent implements OnInit {
       this.listPatientsDone = this.listPatients.filter((item: { status: string; }) => item.status == 'done');
 
       //obteniendo primero de la lista en proceso
-      this.firstPatientInScreen = this.listPatientsCalls[0];
+      this.firstPatientCall = this.listPatientsCalls[0];
       this.firstPatient = this.listPatientsInProcess[0];
 
       setTimeout(function(){
@@ -238,7 +238,7 @@ export class PatientsComponent implements OnInit {
 
     let datos = new FormData();
     datos.append("status",status);
-    this._patient.updatePatient(this.firstPatientInScreen.id, datos).subscribe((response)=>{
+    this._patient.updatePatient(this.firstPatientCall.id, datos).subscribe((response)=>{
       Swal.fire({
         position: 'center',
         icon: 'success',

@@ -126,6 +126,7 @@ export class ScreenComponent implements OnInit {
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
       this.getAllTurns();
       this.getAllPatients();
+      console.log(resp.msg);
       
     if(this.notification == 'voice'){
       if(resp.msg.action === 'call_turn'){
@@ -134,12 +135,12 @@ export class ScreenComponent implements OnInit {
         this.voicePatient(resp.msg.patient);
       }
     }
-
+    
     if(this.notification == 'sound'){
       const audio = new Audio('../../../assets/song/turno.mp3');
-      if(resp.msg === 'call_turn'){
+      if(resp.msg.action === 'call_turn'){
         audio.play();
-      }else if(resp.msg === 'call_patient'){
+      }else if(resp.msg.action === 'call_patient'){
         audio.play();
       }
     }
@@ -150,6 +151,7 @@ export class ScreenComponent implements OnInit {
 
   setNotification(value:any){
     localStorage.setItem('notification',value);
+    this.notification = localStorage.getItem('notification');
     this.action = 'turns';
   }
 

@@ -10,7 +10,7 @@
                     <h3>Lista de pacientes</h3>
                 </div>
                 <div class="col-lg-0 text-start">
-                    <button class="btn btn-success mt-1 mr-2" [disabled]="listPatientsInProcess.length===0" (click)="setStatusTurn('call')"><span class="d-none d-lg-block d-md-block"> Llamar siguiente paciente</span></button>
+                    <button class="btn btn-success mt-1 mr-2" [disabled]="listPatientsInProcess.length===0" (click)="setStatusTurn('call')"><span class="d-none d-lg-block d-md-block"> Siguiente paciente a pantalla</span></button>
                     <button class="btn btn-primary mt-1" (click)="action='register'"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></button>
                 </div>
             </div>
@@ -190,8 +190,8 @@
     </div>
 </div>
 
-<button class="btn btn-danger" (click)="callPatient('call_turn')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
-    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar paciente</b> 
+<button class="btn btn-danger" [disabled]="listPatientsCalls.length<1" (click)="callPatient('call_patient')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
+    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar siguiente paciente</b> 
 </button>
 
 <!-- Modal of patient -->
