@@ -34,5 +34,9 @@ export class UsersService {
     return this.http.post(url, id);
   }
 
+  getUser(identification: any,): Observable<any>{
+    const url = 'https://api.cedulado.microslab.com.do/api/cedulado/'+identification;
+    return this.http.get(url);
+  }
 
 }

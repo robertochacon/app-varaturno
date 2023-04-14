@@ -337,4 +337,14 @@ export class PatientsComponent implements OnInit {
     return true;
   }
 
+  searchPatient(){
+    if(this.identification.length === 11){
+      this._patient.getPatient(this.identification).subscribe((response)=>{
+        let resp = response;
+        this.name = resp.nombre+' '+resp.apellidos;
+        this.age = resp.edad;
+      });
+    }
+  }
+
 }

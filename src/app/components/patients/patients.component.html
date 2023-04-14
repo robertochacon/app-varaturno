@@ -160,7 +160,7 @@
                         No se pudo completar su registro.
                     </div>
                     <h5>Información general</h5>
-                    <input type="text" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Identificacion">
+                    <input type="text" (keyup)="searchPatient()" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Identificacion">
                     <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Nombre">
                     <div class="row">
                         <div class="col-8">
