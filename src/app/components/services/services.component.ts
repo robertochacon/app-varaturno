@@ -68,8 +68,8 @@ export class ServicesComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("user_id",this.user_id);
-    datos.append("entity_id",this.entity_id);
+    datos.append("user_id",'1');
+    datos.append("entity_id",'1');
     datos.append("name",this.name);
     datos.append("description",this.description);
     datos.append("color",this.color);
@@ -83,6 +83,7 @@ export class ServicesComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
+      this.action = 'list';
       this.reset();
       this.getAllEntities();
     },error => {

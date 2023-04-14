@@ -87,15 +87,15 @@ export class ScreenComponent implements OnInit {
     const echo = new Echo(config);
 
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
-      const audio = new Audio('../../../assets/song/turno.mp3');
+
+      this.getAllTurns();
+      this.getAllPatients();
       
-      if(typeof resp.msg === 'object' || resp.msg === 'update_turn' || resp.msg === 'delete_turn'){
+      const audio = new Audio('../../../assets/song/turno.mp3');
+      if(resp.msg === 'update_turn' || resp.msg === 'update_patient'){
         audio.play();
-        this.getAllTurns();
-      }else if (resp.msg === 'register_patient' || resp.msg === 'update_patient' || resp.msg === 'delete_patient') {
-        audio.play();
-        this.getAllPatients();
       }
+    
     });
 
   }

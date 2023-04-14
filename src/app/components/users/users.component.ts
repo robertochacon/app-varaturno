@@ -75,7 +75,7 @@ export class UsersComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("entity_id",this.entity);
+    datos.append("entity_id",'1');
     datos.append("name",this.name);
     datos.append("identification",this.identification);
     datos.append("role",this.role);
@@ -90,6 +90,7 @@ export class UsersComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
+      this.action = 'list';
       this.reset();
       this.getAllUsers();
     },error => {

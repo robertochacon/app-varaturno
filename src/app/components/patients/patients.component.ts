@@ -94,7 +94,7 @@ export class PatientsComponent implements OnInit {
         broadcaster: 'pusher',
         cluster: 'mt1',
         key: 'RCA090698',
-        wsHost: '161.22.44.200',
+        wsHost: '80.240.126.243',
         forceTLS: false,
         enabledTransports: ['ws']
       }
@@ -138,7 +138,7 @@ export class PatientsComponent implements OnInit {
 
     this.loading = true;
     let datos = new FormData();
-    datos.append("entity_id",this.entity_id);
+    datos.append("entity_id",'1');
     datos.append("name",this.name);
     datos.append("identification",this.identification);
     datos.append("phone",this.phone);
@@ -156,6 +156,7 @@ export class PatientsComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
+      this.action = 'list';
       this.reset();
       this.getAllPatients();
     },error => {
@@ -282,6 +283,31 @@ export class PatientsComponent implements OnInit {
         mywindow.close();
       }, 300);
     }, 300);
+
+    Swal.fire({
+      position: 'center',
+      icon: 'info',
+      title: 'Favor espere un momento',
+      text: 'Procesando...',
+      showConfirmButton: false,
+      timer: 2000
+    });
+    setTimeout(() => {
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Listo!',
+        text: 'Ya puedes tomar el ticket',
+        showConfirmButton: false,
+        timer: 5000
+      });
+      
+      setTimeout(() => {
+        this.action = 'start';
+      }, 1000);
+      
+    }, 2000);
 
     return true;
   }

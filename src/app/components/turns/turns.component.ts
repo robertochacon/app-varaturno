@@ -35,7 +35,6 @@ export class TurnsComponent implements OnInit {
   constructor(private _services: ServicesService, private _turns: TurnsService, private _router: Router) { }
 
   ngOnInit(): void {
-    // this.getAllServices();
     this.getAllTurns();
     this.websockets();
     this.user_id = localStorage.getItem('user_id');
@@ -46,79 +45,18 @@ export class TurnsComponent implements OnInit {
     }
   }
 
-  getAllServices(){
-    this.loading = true;
-
-    this._services.getAllServices().subscribe((response)=>{
-
-      this.listServices = response.data;
-
-      setTimeout(function(){
-        console.log(response.data);
-        
-      },100);
-      this.loading = false;
-      
-    }, error=>{
-        this.loadData = false;
-        this.loading = false;
-    })
-
-  }
-
-  save(): void {
-
-    this.loading = true;
-    let datos = new FormData();
-    datos.append("user_id",this.user_id);
-    datos.append("entity_id",this.entity_id);
-    datos.append("service",this.serviceName);
-    datos.append("code",this.code);
-    this._turns.setTurns(datos).subscribe((response)=>{
-      this.loading = false;
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Completado',
-        text: 'El turno '+response.data.code+response.data.id+' ha sido registrado.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      this.getAllTurns();
-    },error => {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Problemas tecnicos!',
-        text: 'No se pudo completar el registro, favor intente nuevamente.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-      this.loading = false;
-    })
-
-  }
-
   getAllTurns(){
     this.loading = true;
-
     this._turns.getAllTurns().subscribe((response)=>{
 
       this.listTurns = response.data;
-      //array list with filter by status
-      this.listTurnsInProcess = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
       this.listTurnsCalls = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
-      this.listTurnsDone = this.listTurns.filter((item: { status: string; }) => item.status == 'done');
-
+      this.listTurnsInProcess = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
       this.firstTurnInProcess = this.listTurnsInProcess[0];
-      // if(this.firstTurnInProcess.length>=1 && this.listTurnsCalls.length<=5){
-      //   this.setNextTurn('call');
-      // }
 
       setTimeout(function(){
         $('#listTurnsInProcess').DataTable();
         $('#listTurnsCalls').DataTable();
-        $('#listTurnsDone').DataTable();
       },100);
       this.loading = false;
       
@@ -126,7 +64,15 @@ export class TurnsComponent implements OnInit {
         this.loadData = false;
         this.loading = false;
     })
+  }
 
+  getJustTurns(){
+    this._turns.getAllTurns().subscribe((response)=>{
+      this.listTurns = response.data;
+      this.listTurnsCalls = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
+      this.listTurnsInProcess = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
+      this.firstTurnInProcess = this.listTurnsInProcess[0];
+    }, error=>{})
   }
 
   websockets(){
@@ -154,87 +100,47 @@ export class TurnsComponent implements OnInit {
     }
 
     const echo = new Echo(config);
-
     echo.channel('channel-turns').listen('UpdateTurns', (resp:any) => {
-      if (resp.msg === 'register_turn') {
+      if (resp.msg === 'register_turn' || resp.msg === 'update_turn') {
+        this.getJustTurns();
+      }
+    });
+
+  }
+
+  deleteTurn(id: any): void {
+      this._turns.deleteTurns(id).subscribe((response)=>{
+        this.deleteRow(id);
         this.getAllTurns();
-      }
-    });
-
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Turno eliminado.',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },error => {})
   }
 
-
-  setStatusTurn(text:string, status:string): void {
-
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: text,
-      showConfirmButton: false,
-      timer: 2000
-    });
-
-    let datos = new FormData();
-    datos.append("status",status);
-    this._turns.updateTurns(this.selectTurn, datos).subscribe((response)=>{
+  attendTurn(id:any){
+    this._turns.deleteTurns(id).subscribe((response)=>{
+      this.deleteRow(id);
       this.getAllTurns();
-      if(status=="done"){
-        setTimeout(()=>{
-          this._router.navigate(['/patients']);
-        },2000);
-      }
-    },error => {
       Swal.fire({
         position: 'center',
-        icon: 'error',
-        title: 'Problemas tecnicos!',
-        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        icon: 'success',
+        title: 'Turno atendido.',
         showConfirmButton: false,
         timer: 2000
       });
-    })
-
-  }
-
-  moveTurn(window:any): void {
-
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Enviado al puesto '+window,
-      showConfirmButton: false,
-      timer: 2000
-    });
-
-    let datos = new FormData();
-    datos.append("status",'call');
-    datos.append("window",window);
-    this._turns.updateTurns(this.selectTurn, datos).subscribe((response)=>{
-      this.getAllTurns();
-    },error => {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Problemas tecnicos!',
-        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    })
-
-  }
-
-  returnColor(status:string){
-    if(status=='call'){
-      return 'success';
-    }else if(status=='wait'){
-      return 'dark';
-    }else{
-      return 'info';
-    }
+      setTimeout(()=>{
+        this._router.navigate(['/patients']);
+      },2000);
+    },error => {})
   }
 
   setNextTurn(status:string){
+    this.deleteRow(this.firstTurnInProcess.id);
     let datos = new FormData();
     datos.append("status",status);
     this._turns.updateTurns(this.firstTurnInProcess.id, datos).subscribe((response)=>{
@@ -249,6 +155,10 @@ export class TurnsComponent implements OnInit {
         timer: 2000
       });
     })
+  }
+
+  deleteRow(id:number){
+    $("#item_" + id).remove();
   }
 
 }

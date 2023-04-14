@@ -64,6 +64,7 @@ export class RequestTurnComponent implements OnInit {
     // datos.append("service",this.serviceName);
     datos.append("code","");
     this._turns.setTurns(datos).subscribe((response)=>{
+    
       this.loading = false;
       Swal.fire({
         position: 'center',
@@ -91,7 +92,7 @@ export class RequestTurnComponent implements OnInit {
       }, 2000);
 
       this.PrintTurn('TN-'+response.data.id);
-      this.getAllTurns();
+      this.getAllTurns(response.data.id);
 
     },error => {
       Swal.fire({
@@ -107,23 +108,21 @@ export class RequestTurnComponent implements OnInit {
 
   }
 
-  getAllTurns(){
-    this.loading = true;
-
+  getAllTurns(id:any){
     this._turns.getAllTurns().subscribe((response)=>{
-
       this.listTurns = response.data;
 
-      setTimeout(function(){
-        console.log(response.data);
-      },100);
-      this.loading = false;
-      
-    }, error=>{
-        this.loadData = false;
-        this.loading = false;
-    })
+      let turns = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
+  
+      if(turns.length<=4){
+        setTimeout(() => {
+          let datos = new FormData();
+          datos.append("status",'call');
+          this._turns.updateTurns(id, datos).subscribe((response)=>{},error => {})
+        }, 2000);
+      }
 
+    }, error=>{})
   }
 
   PrintTurn(turn: any){
