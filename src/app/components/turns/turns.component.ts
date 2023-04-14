@@ -24,6 +24,7 @@ export class TurnsComponent implements OnInit {
   entity_id:any = '';
   windows:any = '';
   firstTurnInProcess: any;
+  firstTurnCall: any;
   listWindows: any[] = [];
   listServices: any[] = [];
   listTurns: any[] = [];
@@ -53,6 +54,7 @@ export class TurnsComponent implements OnInit {
       this.listTurnsCalls = this.listTurns.filter((item: { status: string; }) => item.status == 'call');
       this.listTurnsInProcess = this.listTurns.filter((item: { status: string; }) => item.status == 'wait');
       this.firstTurnInProcess = this.listTurnsInProcess[0];
+      this.firstTurnCall = this.listTurnsCalls[0];
 
       setTimeout(function(){
         $('#listTurnsInProcess').DataTable();
@@ -145,6 +147,29 @@ export class TurnsComponent implements OnInit {
     datos.append("status",status);
     this._turns.updateTurns(this.firstTurnInProcess.id, datos).subscribe((response)=>{
       this.getAllTurns();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+  }
+
+  callNextTurn(status:string){
+    let datos = new FormData();
+    datos.append("status",status);
+    this._turns.updateTurns(this.firstTurnCall.id, datos).subscribe((response)=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Siguiente turno llamado',
+        showConfirmButton: false,
+        timer: 1000
+      });
     },error => {
       Swal.fire({
         position: 'center',

@@ -33,6 +33,7 @@ export class PatientsComponent implements OnInit {
   listPatientsDone: any[] = [];
   listServices: any[] = [];
   firstPatient: any;
+  firstPatientInScreen: any;
   env: any = 'prod';
 
   constructor(private _patient: PatientsService, private _services: ServicesService) { }
@@ -58,6 +59,7 @@ export class PatientsComponent implements OnInit {
       this.listPatientsDone = this.listPatients.filter((item: { status: string; }) => item.status == 'done');
 
       //obteniendo primero de la lista en proceso
+      this.firstPatientInScreen = this.listPatientsCalls[0];
       this.firstPatient = this.listPatientsInProcess[0];
 
       setTimeout(function(){
@@ -219,6 +221,31 @@ export class PatientsComponent implements OnInit {
       console.log(this.firstPatient);
       
       this.getAllPatients();
+    },error => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Problemas tecnicos!',
+        text: 'No se pudo completar la ejecucion, favor intente nuevamente.',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    })
+
+  }
+
+  callPatient(status:string): void {
+
+    let datos = new FormData();
+    datos.append("status",status);
+    this._patient.updatePatient(this.firstPatientInScreen.id, datos).subscribe((response)=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Siguiente paciente llamado',
+        showConfirmButton: false,
+        timer: 2000
+      });
     },error => {
       Swal.fire({
         position: 'center',

@@ -10,7 +10,7 @@
                     <h3>Gestionar turnos</h3>
                 </div>
                 <div class="col-lg-0 text-start">
-                    <button class="btn btn-success mt-1 mr-2" [disabled]="listTurnsInProcess.length===0" (click)="setNextTurn('call')"><span class="d-none d-lg-block d-md-block">Siguiente turno en pantalla</span></button>
+                    <button class="btn btn-success mt-1 mr-2" [disabled]="listTurnsInProcess.length===0" (click)="setNextTurn('call')"><span class="d-none d-lg-block d-md-block">Siguiente turno a pantalla</span></button>
                     <button class="btn btn-primary mt-1" routerLink="/patients"><i class="fa-solid fa-plus d-lg-none d-md-none d-sm-block"></i><span class="d-none d-lg-block d-md-block"><i class="fa-solid fa-plus"></i> Registrar paciente</span></button>
                 </div>
             </div>
@@ -88,8 +88,8 @@
 </div>
 
 
-<button class="btn btn-danger" (click)="setNextTurn('call_turn')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
-    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar turno</b> 
+<button class="btn btn-danger" (click)="callNextTurn('call_turn')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
+    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar siguiente turno</b> 
 </button>
 
 
