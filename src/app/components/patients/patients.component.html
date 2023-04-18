@@ -48,7 +48,7 @@
                                     <td>{{patient.service}}</td>
                                     <td>{{patient.created_at | date:'dd/MM/yyyy'}}</td>
                                     <td>
-                                        <button class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'call')">Llamar</button>
+                                        <button class="btn btn-success mr-2" (click)="setStatusTurnId(patient.id, 'call')">Solicitar</button>
                                         <button class="btn btn-danger" (click)="delete(patient.id)"><i class="fa-solid fa-trash"></i></button>
                                     </td>
                                 </tr>
