@@ -31,6 +31,7 @@ export class PatientsComponent implements OnInit {
   listPatientsCalls: any[] = [];
   listPatientsInProcess: any[] = [];
   listPatientsDone: any[] = [];
+  datos_services: any[] = [];
   listServices: any[] = [];
   firstPatient: any;
   firstPatientCall: any;
@@ -328,10 +329,6 @@ export class PatientsComponent implements OnInit {
         timer: 5000
       });
       
-      setTimeout(() => {
-        this.action = 'start';
-      }, 1000);
-      
     }, 2000);
 
     return true;
@@ -345,6 +342,16 @@ export class PatientsComponent implements OnInit {
         this.age = resp.edad;
       });
     }
+  }
+  
+  add_remove_item(value: string){
+    this.datos_services.push(value)
+    this.service = this.datos_services.toString();
+    console.log(this.datos_services);
+  }
+
+  clear_services_selected(){
+    this.service = '';
   }
 
 }
