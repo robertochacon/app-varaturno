@@ -288,6 +288,7 @@ export class PatientsComponent implements OnInit {
       <html><head><title>LCR</title>
       </head><body>
       <br>
+      <center>
       <p style="margin-top:-2px;"><strong>Identificación: </strong><br>${patient.identification}</p>
       <p style="margin-top:-18px;"><strong>Nombre: </strong><br>${patient.name}</p>
       <p style="margin-top:-18px;"><strong>Servicio: </strong><br>${patient.service}</p>
@@ -351,6 +352,7 @@ export class PatientsComponent implements OnInit {
 
   clear_services_selected(){
     this.service = '';
+    this.datos_services = [];
   }
 
 }
