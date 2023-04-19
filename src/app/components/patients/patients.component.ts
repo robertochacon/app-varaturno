@@ -287,7 +287,6 @@ export class PatientsComponent implements OnInit {
       template = `
       <html><head><title>LCR</title>
       </head><body>
-      <br>
       <center>
       <p style="margin-top:-2px;"><strong>Identificación: </strong><br>${patient.identification}</p>
       <p style="margin-top:-18px;"><strong>Nombre: </strong><br>${patient.name}</p>
