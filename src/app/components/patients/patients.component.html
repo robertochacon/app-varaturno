@@ -97,6 +97,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th></th>
+                                    <th></th>
                                     <th>Identificacion</th>
                                     <th>Nombre</th>
                                     <th>Edad</th>
@@ -108,6 +109,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let patient of listPatientsDone" class="text-start">
+                                    <td class="text-white">{{patient.id}}</td>
                                     <td><i class="fa-solid fa-user mr-2 text-black"></i></td>
                                     <td>{{patient.identification}}</td>
                                     <td>{{patient.name}}</td>
@@ -148,39 +150,39 @@
             <div class="row justify-content-around allscreen shadow">
 
                 <div class="col-lg-7 col-md-7 col-sm-10 text-center p-3 bg-dark">
-                    <!-- <img src=" ../../../assets/img/add_documents.svg " alt=" " width="60% "> -->
+                    <!-- <img src=" ../../../assets/img/add_documents.svg" alt="" width="60%"> -->
                     <h5 class="text-white">Seleccione los servicios</h5>
-                    <div class="row ">
-                        <div class="col-4 p-1 " *ngFor="let service of listServices">
-                            <input type="checkbox" value="{{ service.code }}" name="checkbox" class="btn-check " [id]=" 'btn-check-outlined-'+service.id " autocomplete="off " (click)="add_remove_item(service.code)">
-                            <label class="btn btn-outline-success " [for]=" 'btn-check-outlined-'+service.id ">{{ service.name }}({{ service.code }})</label><br>
+                    <div class="row">
+                        <div class="col-4 p-1" *ngFor="let service of listServices">
+                            <input type="checkbox" value="{{ service.code }}" name="checkbox" class="btn-check" [id]=" 'btn-check-outlined-'+service.id" autocomplete="off" (click)="add_remove_item(service.code)">
+                            <label class="btn btn-outline-success" [for]=" 'btn-check-outlined-'+service.id">{{ service.name }}({{ service.code }})</label><br>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="col-lg-5 col-md-5 col-sm-12 text-center border-radio pt-3 ">
-                    <div class="alert alert-success " role="alert " *ngIf="result==='ok' ">
+                <div class="col-lg-5 col-md-5 col-sm-12 text-center border-radio pt-3">
+                    <div class="alert alert-success" role="alert" *ngIf="result==='ok'">
                         Registro completado.
                     </div>
-                    <div class="alert alert-danger " role="alert " *ngIf="result==='fail' ">
+                    <div class="alert alert-danger" role="alert" *ngIf="result==='fail'">
                         No se pudo completar su registro.
                     </div>
                     <h5>Información general</h5>
-                    <input type="text " (keyup)="searchPatient() " [(ngModel)]="identification " class="form-control shadow mt-3 " maxLength="11 " placeholder="Identificacion ">
-                    <input type="text " [(ngModel)]="name " class="form-control shadow mt-3 " maxLength="50 " placeholder="Nombre ">
-                    <div class="row ">
-                        <div class="col-8 ">
-                            <input type="text " [(ngModel)]="phone " class="form-control shadow mt-3 " maxLength="11 " placeholder="Telefono ">
+                    <input type="text" (keyup)="searchPatient()" [(ngModel)]="identification" class="form-control shadow mt-3" maxLength="11" placeholder="Identificacion">
+                    <input type="text" [(ngModel)]="name" class="form-control shadow mt-3" maxLength="50" placeholder="Nombre">
+                    <div class="row">
+                        <div class="col-8">
+                            <input type="text" [(ngModel)]="phone" class="form-control shadow mt-3" maxLength="11" placeholder="Telefono">
                         </div>
-                        <div class="col-4 ">
-                            <input type="text " [(ngModel)]="age " class="form-control shadow mt-3 " maxLength="11 " placeholder="Edad ">
+                        <div class="col-4">
+                            <input type="text" [(ngModel)]="age" class="form-control shadow mt-3" maxLength="11" placeholder="Edad">
                         </div>
                     </div>
-                    <textarea [(ngModel)]="address " class="form-control mt-3 " id=" " cols="30 " rows="3 " placeholder="Direccion "></textarea>
-                    <!-- <select class="form-control shadow mt-3 " [(ngModel)]="service ">
-                        <option selected value="null ">Selecione un servicio</option>
-                        <option *ngFor="let service of listServices " value="{{ service.name }} ">{{ service.name }}</option>
+                    <textarea [(ngModel)]="address" class="form-control mt-3" id="" cols="30" rows="3" placeholder="Direccion"></textarea>
+                    <!-- <select class="form-control shadow mt-3" [(ngModel)]="service">
+                        <option selected value="null">Selecione un servicio</option>
+                        <option *ngFor="let service of listServices" value="{{ service.name }}">{{ service.name }}</option>
                     </select> -->
                     <b>Servicios seleccionados:</b>
                     <div class="alert shadow" *ngIf="service!='null'">
@@ -189,14 +191,14 @@
                     <div class="alert shadow" *ngIf="service=='null'">
                         No tienes servicios seleccionados
                     </div>
-                    <button [disabled]="service=='null'" class="btn btn-secondary btn-block btn-lg shadow " (click)="clear_services_selected() ">
+                    <button [disabled]="service=='null'" class="btn btn-secondary btn-block btn-lg shadow" (click)="clear_services_selected()">
                         Limpiar servicios
                     </button>
-                    <button *ngIf="!loading " [disabled]="name==='' || identification==='' " class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow " (click)="save() ">
+                    <button *ngIf="!loading" [disabled]="name==='' || identification===''" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
                         Registrar
                     </button>
-                    <button *ngIf="loading " class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow " (click)="save() ">
-                        <span class="spinner-border spinner-border-sm " role="status " aria-hidden="true "></span>
+                    <button *ngIf="loading" class="btn btn-success btn-block btn-lg mt-3 mb-3 shadow" (click)="save()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                         Registrando...
                     </button>
                 </div>
@@ -207,66 +209,66 @@
     </div>
 </div>
 
-<button class="btn btn-danger " [disabled]="listPatientsCalls.length<1 " (click)="callPatient( 'call_patient') " style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px; ">
-    <img src="../../../assets/img/sound.png " width="60px " alt=" "><b>Llamar siguiente paciente</b> 
+<button class="btn btn-danger" [disabled]="listPatientsCalls.length<1" (click)="callPatient( 'call_patient')" style="cursor: pointer;position:absolute;z-index:1;bottom:10px;right:10px;">
+    <img src="../../../assets/img/sound.png" width="60px" alt=""><b>Llamar siguiente paciente</b> 
 </button>
 
 <!-- Modal of patient -->
-<div *ngIf="patientjson !=[ ] " class="modal fade " id="ModalPatient " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
-            <div class="modal-header bg-success ">
-                <h3 class="modal-title text-white " id="exampleModalLabel "><b>Paciente en atención</b></h3>
-                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+<div *ngIf="patientjson !=[ ]" class="modal fade" id="ModalPatient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h3 class="modal-title text-white" id="exampleModalLabel"><b>Paciente en atención</b></h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body">
 
-                <div class="row ">
-                    <div class="col-6 ">
-                        <div class="container shadow bg-dark text-white rounded ">
-                            <b for=" ">Identificacion:</b>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Identificacion:</b>
                             <p>{{ patientjson.identification }}</p>
                         </div>
                     </div>
-                    <div class="col-6 ">
-                        <div class="container shadow bg-dark text-white rounded ">
-                            <b for=" ">Nombre:</b>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Nombre:</b>
                             <p>{{ patientjson.name }}</p>
                         </div>
                     </div>
-                    <div class="col-6 ">
-                        <div class="container shadow bg-dark text-white rounded ">
-                            <b for=" ">Edad:</b>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Edad:</b>
                             <p>{{ patientjson.age }}</p>
                         </div>
                     </div>
-                    <div class="col-6 ">
-                        <div class="container shadow bg-dark text-white rounded ">
-                            <b for=" ">Servicio:</b>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Servicio:</b>
                             <p>{{ patientjson.service }}</p>
                         </div>
                     </div>
-                    <div class="col-6 ">
-                        <div class="container shadow bg-dark text-white rounded ">
-                            <b for=" ">Fecha:</b>
+                    <div class="col-6">
+                        <div class="container shadow bg-dark text-white rounded">
+                            <b for="">Fecha:</b>
                             <p>{{patientjson.created_at | date:'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="modal-footer ">
-                <button type="button " class="btn btn-success " data-bs-dismiss="modal " (click)="PrintTurn(patientjson) ">Completar</button>
-                <button type="button " class="btn btn-danger " data-bs-dismiss="modal ">Cerrar</button>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="PrintTurn(patientjson)">Completar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none " style="height:100vh; ">
+<div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none" style="height:100vh;">
     <div>
-        <img class="mb-3 " src="../../../assets/img/devices.svg " width="80% " alt=" ">
-        <h2 class="mb-3 ">Utilice una tableta o una pc para visualizar contenido.</h2>
-        <a routerLink="/ " class="btn btn-success shadow ">Pagina principal</a>
+        <img class="mb-3" src="../../../assets/img/devices.svg" width="80%" alt="">
+        <h2 class="mb-3">Utilice una tableta o una pc para visualizar contenido.</h2>
+        <a routerLink="/" class="btn btn-success shadow">Pagina principal</a>
     </div>
 </div>

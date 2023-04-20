@@ -66,7 +66,9 @@ export class PatientsComponent implements OnInit {
       setTimeout(function(){
         $('#listPatientsInProcess').DataTable();
         $('#listPatientsCalls').DataTable();
-        $('#listPatientsDone').DataTable();
+        $('#listPatientsDone').DataTable({
+          order: [[0, 'desc']],
+        });
       },200);
       this.loading = false;
       
