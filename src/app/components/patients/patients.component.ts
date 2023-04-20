@@ -67,6 +67,7 @@ export class PatientsComponent implements OnInit {
         $('#listPatientsInProcess').DataTable();
         $('#listPatientsCalls').DataTable();
         $('#listPatientsDone').DataTable({
+          destroy: true,
           order: [[0, 'desc']],
         });
       },200);
@@ -117,6 +118,7 @@ export class PatientsComponent implements OnInit {
     setTimeout(function(){
       $('#listPatientsInProcess').DataTable();
       $('#listPatientsCalls').DataTable();
+      $('#listPatientsDone').DataTable();
     },100);
   }
 
