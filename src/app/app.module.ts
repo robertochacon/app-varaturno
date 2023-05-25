@@ -20,6 +20,8 @@ import { ScreenComponent } from './components/screen/screen.component';
 import { RequestTurnComponent } from './components/request-turn/request-turn.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { ModalPasswordComponent } from './components/modal-password/modal-password.component';
+import { AreasComponent } from './components/areas/areas.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { ModalPasswordComponent } from './components/modal-password/modal-passwo
     RequestTurnComponent,
     PatientsComponent,
     ModalPasswordComponent,
+    AreasComponent,
+    RoomsComponent,
   ],
   imports: [
     BrowserModule,

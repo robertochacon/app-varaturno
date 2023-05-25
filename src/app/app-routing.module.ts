@@ -11,6 +11,8 @@ import { UsersComponent } from './components/users/users.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PatientsComponent } from './components/patients/patients.component';
+import { AreasComponent } from './components/areas/areas.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path: 'turns', component: TurnsComponent},
   {path: 'request-turn', component: RequestTurnComponent},
   {path: 'settings', component: SettingsComponent},
+  {path: 'areas', component: AreasComponent},
+  {path: 'rooms', component: RoomsComponent},
   {path: '**', redirectTo: '/'},
 ];
 

@@ -10,9 +10,17 @@
         <img src="./assets/img/entities.png" width="50px" alt="">
         <b class="text-white d-block">Entidades</b>
     </a>
+    <a routerLink="/areas" *ngIf="role==='super_admin' || role==='admin'" [ngClass]="page==='areas'?'selected':''" class="p-3 btns text-center">
+        <img src="./assets/img/areas.png" width="50px" alt="">
+        <b class="text-white d-block">Areas</b>
+    </a>
     <a routerLink="/services" *ngIf="role==='super_admin' || role==='admin'" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="./assets/img/service.png" width="50px" alt="">
         <b class="text-white d-block">Servicios</b>
+    </a>
+    <a routerLink="/rooms" *ngIf="role==='super_admin' || role==='admin'" [ngClass]="page==='rooms'?'selected':''" class="p-3 btns text-center">
+        <img src="./assets/img/rooms.png" width="50px" alt="">
+        <b class="text-white d-block">Salas</b>
     </a>
     <!-- <a routerLink="/screen" [ngClass]="page==='dashboard'?'selected':''" class="p-3 btns text-center">
         <img src="./assets/img/tv.png" width="50px" alt="">
