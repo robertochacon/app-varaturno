@@ -17,7 +17,7 @@ export class ScreenComponent implements OnInit {
   listPatients: any[] = [];
   action:any = 'notification';
   notification:any = '';
-  env:any = 'prod';
+  env:any = 'dev';
 
   constructor(private _services: ServicesService, private _turns: TurnsService, private _patient: PatientsService) { }
 
@@ -137,7 +137,7 @@ export class ScreenComponent implements OnInit {
     }
     
     if(this.notification == 'sound'){
-      const audio = new Audio('../../../assets/song/turno.mp3');
+      const audio = new Audio('./assets/song/turno.mp3');
       if(resp.msg.action === 'call_turn'){
         audio.play();
       }else if(resp.msg.action === 'call_patient'){

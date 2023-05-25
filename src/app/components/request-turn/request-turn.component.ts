@@ -134,7 +134,7 @@ export class RequestTurnComponent implements OnInit {
     <html><head><title>LCR</title>
     </head><body>
     <center><h1>TURNO<br>${turn}</h1></center>
-    <center><img src="../../../assets/img/qr.png" class="shadow mb-4" width="110px" style="margin-top:-20px;border-radius: 5px 5px;"></center>
+    <center><img src="./assets/img/qr.png" class="shadow mb-4" width="110px" style="margin-top:-20px;border-radius: 5px 5px;"></center>
     </body></html>
     `;
 

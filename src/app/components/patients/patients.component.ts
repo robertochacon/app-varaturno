@@ -35,7 +35,7 @@ export class PatientsComponent implements OnInit {
   listServices: any[] = [];
   firstPatient: any;
   firstPatientCall: any;
-  env: any = 'prod';
+  env: any = 'dev';
 
   constructor(private _patient: PatientsService, private _services: ServicesService) { }
 

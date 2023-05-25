@@ -10,7 +10,7 @@
 
                         <div *ngIf="action=='start'">
 
-                            <img src="../../../assets/img/logo.png" alt="" class="mb-1" width="100px" style="border-radius: 5px 5px;border:10px solid white;">
+                            <img src="./assets/img/logo.png" alt="" class="mb-1" width="100px" style="border-radius: 5px 5px;border:10px solid white;">
                             <h3 style="color: green;">Laboratorio Clinico Rodriguez</h3>
 
                             <!-- <h3 class="text-dark mb-4">Seleccione una opcion</h3> -->
@@ -18,7 +18,7 @@
                                 <div class="col-lg-10 col-md-10 col-sm-10" (click)="save()">
                                     <div class="container bg-dark shadow p-2 rounded" style="border-left:5px solid green;border-right:5px solid green;">
                                         <div class="d-flex justify-content-around align-items-center">
-                                            <img src="../../../assets/img/ticket.png" alt="" class="mb-2" width="150px">
+                                            <img src="./assets/img/ticket.png" alt="" class="mb-2" width="150px">
                                             <h1 class="text-white">Obtener turno</h1>
                                         </div>
                                     </div>
@@ -26,7 +26,7 @@
                                 <div class="col-lg-10 col-md-10 col-sm-10 mt-4" (click)="action='consult'">
                                     <div class="container bg-dark shadow p-2 rounded" style="border-left:5px solid green;border-right:5px solid green;">
                                         <div class="d-flex justify-content-around align-items-center">
-                                            <img src="../../../assets/img/consult.png" alt="" class="mb-2" width="150px">
+                                            <img src="./assets/img/consult.png" alt="" class="mb-2" width="150px">
                                             <h1 class="text-white">Consultar resultados</h1>
                                         </div>
                                     </div>
@@ -46,7 +46,7 @@
                             </div>
                             <hr>
 
-                            <!-- <img src="../../../assets/img/swipe-up.gif" alt="" class="shadow mb-4" width="100px" style="border-radius: 5px 5px;"> -->
+                            <!-- <img src="./assets/img/swipe-up.gif" alt="" class="shadow mb-4" width="100px" style="border-radius: 5px 5px;"> -->
 
                             <div class="row">
                                 <div class="col-4 alert text-center d-flex align-items-center" *ngFor="let service of listServices " role="alert " (click)="serviceName=service.name;code=service.code;save() ">
@@ -73,10 +73,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-6">
-                                    <img src="../../../assets/img/phoneqr.jpg" alt="" class="mb-4" width="300px" style="border-radius: 5px 5px;">
+                                    <img src="./assets/img/phoneqr.jpg" alt="" class="mb-4" width="300px" style="border-radius: 5px 5px;">
                                 </div>
                                 <div class="col-6">
-                                    <img src="../../../assets/img/lcr-consulting-out.png" alt="" class="mb-4" width="300px" style="border-radius: 5px 5px;">
+                                    <img src="./assets/img/lcr-consulting-out.png" alt="" class="mb-4" width="300px" style="border-radius: 5px 5px;">
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
 <div class="d-flex justify-content-center align-items-center text-center d-sm-block d-lg-none d-md-none " style="height:100vh; ">
     <div>
-        <img class="mb-3 " src="../../../assets/img/devices.svg " width="80% " alt=" ">
+        <img class="mb-3 " src="./assets/img/devices.svg " width="80% " alt=" ">
         <h2 class="mb-3 ">Utilice una tableta o una pc para visualizar contenido.</h2>
         <a routerLink="/ " class="btn btn-success shadow ">Pagina principal</a>
     </div>
